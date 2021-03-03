@@ -1,0 +1,4 @@
+
+Errore avvenuto in data :Wed Mar 03 18:18:09 CET 2021
+     Causa: ERRORE DURANTE LA RICHIESTA EVENTO
+     Dettagli: Server returned HTTP response code: 400 for URL: https://app.ticketmaster.com/discovery/v2/events.json?stateCode=FL&countryCode=US&apikey=02znw2Zzu1vGIRauqzXnI595CY7TlXX1&page=8&size=200

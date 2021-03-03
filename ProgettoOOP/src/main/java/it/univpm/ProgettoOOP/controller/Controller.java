@@ -23,7 +23,7 @@ import it.univpm.ProgettoOOP.services.CercaEvento;
  * <b>Classe</b> controller che gestisce tutte le chiamate al server
  * @author Vecchiola Gregorio
  * @author Rongoni Alessandro
- * @version 1.0
+ * @version 1.0as
  */
 
 @RestController
@@ -50,8 +50,41 @@ public class Controller {
 		 JsonObject genere = classification.get("segment").getAsJsonObject();
 		  e.setGenere(genere.get("name").getAsString());
 		 JsonObject ambedded2 = objEvent.get("_embedded").getAsJsonObject();
-		 JsonObject 
-		 
+		 JsonArray venues = ambedded2.get("venues").getAsJsonArray();
+		 JsonObject stato = venues.get(0).getAsJsonObject();
+		 JsonObject statecode = stato.get("state").getAsJsonObject();
+		  e.setStateCode(statecode.get("name").getAsString()); 
+		 JsonArray attractions = ambedded2.get("attractions").getAsJsonArray();
+		 JsonObject sito = venues.get(0).getAsJsonObject();
+		 JsonObject sito2 = stato.get("upcomingEvents").getAsJsonObject();
+		 try {
+			  if(statecode.get("ticketmaster").getAsInt()!=0) {
+				  e.setSito("ticketmaster");
+			  }
+		} catch (Exception e2) {
+			// TODO: handle exception
+		}
+		 try {
+			 if(statecode.get("universe").getAsInt()!=0) {
+				  e.setSito("universe");
+			  }
+		} catch (Exception e2) {
+			// TODO: handle exception
+		}
+		 try {
+			 if(statecode.get("tmr").getAsInt()!=0) {
+				  e.setSito("tmr");
+			  }
+		} catch (Exception e2) {
+			// TODO: handle exception
+		}
+		 try {
+			 if(statecode.get("frontgate").getAsInt()!=0) {
+				  e.setSito("frontgate");
+			  }
+		} catch (Exception e2) {
+			// TODO: handle exception
+		}
 		 JsonObject page = Obj.get("page").getAsJsonObject();
 		 	int totevents = page.get("totalElements").getAsInt();
 		 System.out.println(totevents);
