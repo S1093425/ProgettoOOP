@@ -97,7 +97,7 @@ public class Controller {
 				 JsonObject statecode = stato.get("state").getAsJsonObject();
 				 s.setStateCode(statecode.get("name").getAsString()); 
 				 JsonObject pagesigle = Objsigle.get("page").getAsJsonObject();
-				 s.setEventi_Totali(pagesigle.get("totalElements").getAsInt());
+				 s.setEventi_Totali(pagesigle.get("totalElements").getAsInt());			 
 				 int[] array = new int[5];
 				for(int j=0;j<array_source.size();j++) {
 					String urlsource="https://app.ticketmaster.com/discovery/v2/events.json?stateCode="+array_sigle.get(i).getAsString()+"&countryCode=US&source="+array_source.get(j).getAsString()+"&apikey=02znw2Zzu1vGIRauqzXnI595CY7TlXX1&size=199";
@@ -120,6 +120,7 @@ public class Controller {
 				JsonObject JsonStato = new JsonObject();
 				JsonStatistiche.add(JsonStato);
 				JsonStato.addProperty("State Code", s.getStateCode());
+				JsonStato.addProperty("Eventi Totali", s.getEventi_Totali());
 				JsonArray JsonAGeneri= new JsonArray();
 				JsonStato.add("Generi", JsonAGeneri);
 				JsonObject JsonGeneri = new JsonObject();
@@ -140,6 +141,104 @@ public class Controller {
 			}
 			buffer.close();
 
+			int maxStato=0; int minStato=0;String nomeStatoMax;String nomeStatoMin;
+			String[][] nomeSource = new String[2][5];
+			int[][] Source= {{0,0,0,0,0},{0,0,0,0,0}};
+			String[][] nomeGenere= new String[2][4];
+			int[][] Genere= {{0,0,0,0},{0,0,0,0}};
+			for(int i=0;i<stati.size();i++) {
+				 if (maxStato<stati.get(i).getEventi_Totali()) {
+					 nomeStatoMax=stati.get(i).getStateCode();
+					 maxStato=stati.get(i).getEventi_Totali();
+				 }
+				 if (minStato>stati.get(i).getEventi_Totali()) {
+					 nomeStatoMin=stati.get(i).getStateCode();
+					 minStato=stati.get(i).getEventi_Totali();
+				 }
+				 
+				 if (Source[0][0]<stati.get(i).getSource()[0]) {
+					 nomeSource[0][0]=stati.get(i).getStateCode();
+					 Source[0][0]=stati.get(i).getSource()[0];
+				 }
+				 if (Source[1][0]>stati.get(i).getSource()[0]) {
+					 nomeSource[1][0]=stati.get(i).getStateCode();
+					 Source[1][0]=stati.get(i).getSource()[0];
+				 }
+
+				 if (Source[0][1]>stati.get(i).getSource()[1]) {
+					 nomeSource[0][1]=stati.get(i).getStateCode();
+					 Source[0][1]=stati.get(i).getSource()[1];
+				 }
+				 if (Source[1][1]>stati.get(i).getSource()[1]) {
+					 nomeSource[1][1]=stati.get(i).getStateCode();
+					 Source[1][1]=stati.get(i).getSource()[1];
+				 }
+
+				 if (Source[0][2]>stati.get(i).getSource()[2]) {
+					 nomeSource[0][2]=stati.get(i).getStateCode();
+					 Source[0][2]=stati.get(i).getSource()[2];
+				 }
+				 if (Source[1][2]>stati.get(i).getSource()[2]) {
+					 nomeSource[1][2]=stati.get(i).getStateCode();
+					 Source[1][2]=stati.get(i).getSource()[2];
+				 }
+
+				 if (Source[0][3]>stati.get(i).getSource()[3]) {
+					 nomeSource[0][3]=stati.get(i).getStateCode();
+					 Source[0][3]=stati.get(i).getSource()[3];
+				 }
+				 if (Source[1][3]>stati.get(i).getSource()[3]) {
+					 nomeSource[1][3]=stati.get(i).getStateCode();
+					 Source[1][3]=stati.get(i).getSource()[3];
+				 }
+
+				 if (Source[0][4]>stati.get(i).getSource()[4]) {
+					 nomeSource[0][4]=stati.get(i).getStateCode();
+					 Source[0][4]=stati.get(i).getSource()[4];
+				 }
+				 if (Source[1][4]>stati.get(i).getSource()[4]) {
+					 nomeSource[1][4]=stati.get(i).getStateCode();
+					 Source[1][4]=stati.get(i).getSource()[4];
+				 }
+
+				 if (Genere[0][0]<stati.get(i).getGeneri()[0]) {
+					 nomeGenere[0][0]=stati.get(i).getStateCode();
+					 Genere[0][0]=stati.get(i).getGeneri()[0];
+				 }
+				 if (Genere[1][0]>stati.get(i).getGeneri()[0]) {
+					 nomeGenere[1][0]=stati.get(i).getStateCode();
+					 Genere[1][0]=stati.get(i).getGeneri()[0];
+				 }
+
+				 if (Genere[0][1]<stati.get(i).getGeneri()[1]) {
+					 nomeGenere[0][1]=stati.get(i).getStateCode();
+					 Genere[0][1]=stati.get(i).getGeneri()[1];
+				 }
+				 if (Genere[1][1]>stati.get(i).getGeneri()[1]) {
+					 nomeGenere[1][1]=stati.get(i).getStateCode();
+					 Genere[1][1]=stati.get(i).getGeneri()[1];
+				 }
+
+				 if (Genere[0][2]<stati.get(i).getGeneri()[2]) {
+					 nomeGenere[0][2]=stati.get(i).getStateCode();
+					 Genere[0][2]=stati.get(i).getGeneri()[2];
+				 }
+				 if (Genere[1][2]>stati.get(i).getGeneri()[2]) {
+					 nomeGenere[1][2]=stati.get(i).getStateCode();
+					 Genere[1][2]=stati.get(i).getGeneri()[2];
+				 }
+
+				 if (Genere[0][3]<stati.get(i).getGeneri()[3]) {
+					 nomeGenere[0][3]=stati.get(i).getStateCode();
+					 Genere[0][3]=stati.get(i).getGeneri()[3];
+				 }
+				 if (Genere[1][3]>stati.get(i).getGeneri()[3]) {
+					 nomeGenere[1][3]=stati.get(i).getStateCode();
+					 Genere[1][3]=stati.get(i).getGeneri()[3];
+				 }
+				 
+				 
+			 }
 		
 		}catch (JsonSyntaxException e) {
 			Log.report("FILE sigle.json NON TROVATO", e.getMessage());
