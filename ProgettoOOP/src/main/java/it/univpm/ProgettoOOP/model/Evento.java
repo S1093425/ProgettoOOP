@@ -1,30 +1,21 @@
 package it.univpm.ProgettoOOP.model;
 
-import java.sql.Date;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class Evento {
 
 	private String Name;
 	private String Genere;
 	private Date DataInizio;
-	private String Sito;
 	private String Stato;
 
 	public Evento() {
 	}
-
-	public Evento(String Name, String Genere, Date DataInizio, String Sito, String Stato) {
-
-		this.Name = Name;
-		this.Genere = Genere;
-		this.DataInizio = DataInizio;
-		this.Sito = Sito;
-		this.Stato = Stato;
-	}
-
+	
 	public String getStateCode() {
 		return Stato;
 	}
@@ -53,16 +44,10 @@ public class Evento {
 		return DataInizio;
 	}
 
-	public void setDataInizio(String dataInizio) {
-		//DateTimeFormatter formatter= DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z");
-		DataInizio = null;
-	}
-
-	public String getSito() {
-		return Sito;
-	}
-
-	public void setSito(String sito) {
-		Sito = sito;
+	public void setDataInizio(String dataInizio) throws Exception {
+		//DateTimeFormatter formatter= DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		SimpleDateFormat strFormat1= new SimpleDateFormat("yyyy-MM-dd");
+		DataInizio= strFormat1.parse(dataInizio);
+		
 	}
 }

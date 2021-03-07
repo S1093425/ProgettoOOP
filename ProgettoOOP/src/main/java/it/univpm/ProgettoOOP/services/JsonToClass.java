@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import it.univpm.ProgettoOOP.log.Log;
 import it.univpm.ProgettoOOP.model.Evento;
 
 public class JsonToClass {
@@ -16,7 +17,12 @@ public class JsonToClass {
 			 	e.setName(objEvent.get("name").getAsString());
 			 JsonObject dates = objEvent.get("dates").getAsJsonObject();
 			 JsonObject start = dates.get("start").getAsJsonObject();
+			 try {
 			 	e.setDataInizio(start.get("localDate").getAsString());
+			 }catch(Exception l){
+				 System.out.println("Formato data errato");
+				 Log.report("ERRORE FORMATO DATA",l.getMessage());
+			 }
 			 try{
 			 JsonArray classification = objEvent.get("classifications").getAsJsonArray();
 			 JsonObject primary = classification.get(0).getAsJsonObject();
@@ -24,44 +30,13 @@ public class JsonToClass {
 			  e.setGenere(genere.get("name").getAsString());
 			 }catch(Exception p){
 				 e.setGenere("Not Defined");
+				 Log.report("GENERE NON DEFINITO",p.getMessage());
 			 }
 			  JsonObject ambedded2 = objEvent.get("_embedded").getAsJsonObject();
 			 JsonArray venues = ambedded2.get("venues").getAsJsonArray();
 			 JsonObject stato = venues.get(0).getAsJsonObject();
 			 JsonObject statecode = stato.get("state").getAsJsonObject();
 			  e.setStateCode(statecode.get("name").getAsString()); 
-			 //JsonArray attractions = ambedded2.get("attractions").getAsJsonArray();
-			 //JsonObject sito = attractions.get(0).getAsJsonObject();
-			 JsonObject sito2 = stato.get("upcomingEvents").getAsJsonObject();
-			 try {
-				  if(sito2.get("ticketmaster").getAsInt()!=0) {
-					  e.setSito("Ticketmaster");
-				  }
-			} catch (Exception e2) {
-				// TODO: handle exception
-			}
-			 try {
-				 if(sito2.get("universe").getAsInt()!=0) {
-					  e.setSito("Universe");
-				  }
-			} catch (Exception e2) {
-				// TODO: handle exception
-			}
-			 try {
-				 if(sito2.get("tmr").getAsInt()!=0) {
-					  e.setSito("Ticketmaster Resale");
-				  }
-			} catch (Exception e2) {
-				// TODO: handle exception
-			}
-			 try {
-				 if(sito2.get("frontgate").getAsInt()!=0) {
-					  e.setSito("FrontGate Tickets");
-				  }
-			} catch (Exception e2) {
-				// TODO: handle exception
-			}
-			System.out.println(e.getName());
 			return e;	
 		}
 }
