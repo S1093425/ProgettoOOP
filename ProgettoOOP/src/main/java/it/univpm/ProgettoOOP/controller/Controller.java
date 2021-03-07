@@ -119,7 +119,7 @@ public class Controller {
 				stati.add(s);
 				JsonObject JsonStato = new JsonObject();
 				JsonStatistiche.add(JsonStato);
-				JsonStato.addProperty("State Code", s.getStateCode());
+				JsonStato.addProperty("Stato", s.getStateCode());
 				JsonStato.addProperty("Eventi Totali", s.getEventi_Totali());
 				JsonArray JsonAGeneri= new JsonArray();
 				JsonStato.add("Generi", JsonAGeneri);
