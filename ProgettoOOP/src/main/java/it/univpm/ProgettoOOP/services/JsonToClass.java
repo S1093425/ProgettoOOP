@@ -39,4 +39,7 @@ public class JsonToClass {
 			  e.setStateCode(statecode.get("name").getAsString()); 
 			return e;	
 		}
+		
+		
+		
 }
