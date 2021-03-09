@@ -84,9 +84,9 @@ public class Controller {
 			JsonObject jo = JsonParser.parseReader(buffer).getAsJsonObject(); 
 			JsonArray array_sigle = jo.get("sigle").getAsJsonArray();
 			JsonArray array_source = jo.get("source").getAsJsonArray();
-			JsonArray array_generi = jo.get("generi").getAsJsonArray();
-			Stato s= new Stato();
-			for (int i = 0; i < array_sigle.size(); i++) {			
+			JsonArray array_generi = jo.get("generi").getAsJsonArray();	
+			for (int i = 0; i < array_sigle.size(); i++) {
+				Stato s= new Stato();
 				String ursigle="https://app.ticketmaster.com/discovery/v2/events.json?stateCode="+array_sigle.get(i).getAsString()+"&countryCode=US&apikey=02znw2Zzu1vGIRauqzXnI595CY7TlXX1&page=0&size=199";
 				 String statsigle=CercaEvento.getEvento(ursigle);
 				 JsonObject Objsigle = (JsonObject)JsonParser.parseString(statsigle);
@@ -143,12 +143,31 @@ public class Controller {
 			}
 			buffer.close();
 
-			int maxStato=0; int minStato=0;String nomeStatoMax="";String nomeStatoMin="";
+			int maxStato=stati.get(0).getEventi_Totali(); int minStato=stati.get(0).getEventi_Totali();
+			String nomeStatoMax=stati.get(0).getStateCode();String nomeStatoMin=stati.get(0).getStateCode();
 			String[][] nomeSource = new String[2][5];
-			int[][] Source= {{0,0,0,0,0},{0,0,0,0,0}};
+			int[][] Source= new int[2][5];
+			for(int i=0; i<5;i++) {
+				nomeSource[0][i]=stati.get(0).getStateCode();
+				nomeSource[1][i]=stati.get(0).getStateCode();
+				Source[0]=stati.get(0).getSource();
+				Source[1]=stati.get(0).getSource();
+			}			
 			String[][] nomeGenere= new String[2][4];
-			int[][] Genere= {{0,0,0,0},{0,0,0,0}};
-			for(int i=0;i<stati.size();i++) {
+			int[][] Genere= new int[2][4];
+			for(int i=0; i<4;i++) {
+				nomeGenere[0][i]=stati.get(0).getStateCode();
+				nomeGenere[1][i]=stati.get(0).getStateCode();
+				Genere[0]=stati.get(0).getGeneri();
+				Genere[1]=stati.get(0).getGeneri();
+			}
+			for(int p=0;p<5;p++) {
+				System.out.println(Source[0][p]);
+				System.out.println(nomeSource[0][p]);
+				System.out.println(Source[1][p]);
+				System.out.println(nomeSource[1][p]);
+			}
+			for(int i=1;i<stati.size();i++) {
 				 if (maxStato<stati.get(i).getEventi_Totali()) {
 					 nomeStatoMax=stati.get(i).getStateCode();
 					 maxStato=stati.get(i).getEventi_Totali();
@@ -157,16 +176,23 @@ public class Controller {
 					 nomeStatoMin=stati.get(i).getStateCode();
 					 minStato=stati.get(i).getEventi_Totali();
 				 }
-				 
-				 if (Source[0][0]<stati.get(i).getSource()[0]) {
+				 System.out.println("------------------");
+				 System.out.println("max:"+nomeSource[0][0]);
+				 System.out.println("max:"+Source[0][0]);
+				 System.out.println("------------------");
+				 System.out.println("min:"+nomeSource[1][0]);
+				 System.out.println("min:"+Source[1][0]);
+				 if (Source[0][0]<stati.get(i).getSource()[0]) {					 
 					 nomeSource[0][0]=stati.get(i).getStateCode();
 					 Source[0][0]=stati.get(i).getSource()[0];
 				 }
+				 
 				 if (Source[1][0]>stati.get(i).getSource()[0]) {
 					 nomeSource[1][0]=stati.get(i).getStateCode();
 					 Source[1][0]=stati.get(i).getSource()[0];
 				 }
 
+				 /*
 				 if (Source[0][1]>stati.get(i).getSource()[1]) {
 					 nomeSource[0][1]=stati.get(i).getStateCode();
 					 Source[0][1]=stati.get(i).getSource()[1];
@@ -175,7 +201,6 @@ public class Controller {
 					 nomeSource[1][1]=stati.get(i).getStateCode();
 					 Source[1][1]=stati.get(i).getSource()[1];
 				 }
-
 				 if (Source[0][2]>stati.get(i).getSource()[2]) {
 					 nomeSource[0][2]=stati.get(i).getStateCode();
 					 Source[0][2]=stati.get(i).getSource()[2];
@@ -237,90 +262,193 @@ public class Controller {
 				 if (Genere[1][3]>stati.get(i).getGeneri()[3]) {
 					 nomeGenere[1][3]=stati.get(i).getStateCode();
 					 Genere[1][3]=stati.get(i).getGeneri()[3];
-				 } 
+				 } */
 			 }
-			JsonObject JsonStatGlob = new JsonObject();
-			JsonStatisticheGlobali.add(JsonStatGlob);
-			JsonObject JsonMaxStati = new JsonObject();
-			JsonMaxStati.add("Stato con il maggior numero di eventi", JsonMaxStati);
-			JsonMaxStati.addProperty("Nome", nomeStatoMax);
-			JsonMaxStati.addProperty("Eventi",maxStato);
-			JsonObject JsonMinStati = new JsonObject();
-			JsonMinStati.add("Stato con il minor numero di eventi", JsonMinStati);
-			JsonMinStati.addProperty("Nome", nomeStatoMin);
-			JsonMinStati.addProperty("Eventi",minStato);
-			/*JsonObject JsonMaxStati = new JsonObject();
-			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
-			JsonStatGlob.addProperty("Nome", nomeStatoMax);
-			JsonStatGlob.addProperty("Eventi",maxStato);
-			JsonObject JsonMaxStati = new JsonObject();
-			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
-			JsonStatGlob.addProperty("Nome", nomeStatoMax);
-			JsonStatGlob.addProperty("Eventi",maxStato);
-			JsonObject JsonMaxStati = new JsonObject();
-			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
-			JsonStatGlob.addProperty("Nome", nomeStatoMax);
-			JsonStatGlob.addProperty("Eventi",maxStato);
-			JsonObject JsonMaxStati = new JsonObject();
-			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
-			JsonStatGlob.addProperty("Nome", nomeStatoMax);
-			JsonStatGlob.addProperty("Eventi",maxStato);
-			JsonObject JsonMaxStati = new JsonObject();
-			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
-			JsonStatGlob.addProperty("Nome", nomeStatoMax);
-			JsonStatGlob.addProperty("Eventi",maxStato);
-			JsonObject JsonMaxStati = new JsonObject();
-			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
-			JsonStatGlob.addProperty("Nome", nomeStatoMax);
-			JsonStatGlob.addProperty("Eventi",maxStato);
-			JsonObject JsonMaxStati = new JsonObject();
-			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
-			JsonStatGlob.addProperty("Nome", nomeStatoMax);
-			JsonStatGlob.addProperty("Eventi",maxStato);
-			JsonObject JsonMaxStati = new JsonObject();
-			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
-			JsonStatGlob.addProperty("Nome", nomeStatoMax);
-			JsonStatGlob.addProperty("Eventi",maxStato);
-			JsonObject JsonMaxStati = new JsonObject();
-			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
-			JsonStatGlob.addProperty("Nome", nomeStatoMax);
-			JsonStatGlob.addProperty("Eventi",maxStato);
-			JsonObject JsonMaxStati = new JsonObject();
-			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
-			JsonStatGlob.addProperty("Nome", nomeStatoMax);
-			JsonStatGlob.addProperty("Eventi",maxStato);
-			JsonObject JsonMaxStati = new JsonObject();
-			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
-			JsonStatGlob.addProperty("Nome", nomeStatoMax);
-			JsonStatGlob.addProperty("Eventi",maxStato);
-			JsonObject JsonMaxStati = new JsonObject();
-			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
-			JsonStatGlob.addProperty("Nome", nomeStatoMax);
-			JsonStatGlob.addProperty("Eventi",maxStato);
-			JsonObject JsonMaxStati = new JsonObject();
-			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
-			JsonStatGlob.addProperty("Nome", nomeStatoMax);
-			JsonStatGlob.addProperty("Eventi",maxStato);
-			JsonObject JsonMaxStati = new JsonObject();
-			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
-			JsonStatGlob.addProperty("Nome", nomeStatoMax);
-			JsonStatGlob.addProperty("Eventi",maxStato);
-			JsonObject JsonMaxStati = new JsonObject();
-			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
-			JsonStatGlob.addProperty("Nome", nomeStatoMax);
-			JsonStatGlob.addProperty("Eventi",maxStato);
-			JsonObject JsonMaxStati = new JsonObject();
-			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
-			JsonStatGlob.addProperty("Nome", nomeStatoMax);
-			JsonStatGlob.addProperty("Eventi",maxStato);
-			JsonObject JsonMaxStati = new JsonObject();
-			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
-			JsonStatGlob.addProperty("Nome", nomeStatoMax);
-			JsonStatGlob.addProperty("Eventi",maxStato);
-			JsonObject JsonMaxStati = new JsonObject();
-			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
-			JsonStatGlob.addProperty("Nome", nomeStatoMax);
-			JsonStatGlob.addProperty("Eventi",maxStato);*/
+			 /*
+				System.out.println(maxStato);
+				System.out.println(nomeStatoMax);
+				
+				System.out.println(minStato);
+			System.out.println(nomeStatoMin);
+			for(int p=0;p<5;p++) {
+				System.out.println(Source[0][p]);
+				System.out.println(nomeSource[0][p]);
+				System.out.println(Source[1][p]);
+				System.out.println(nomeSource[1][p]);
+			}
+			for(int p=0;p<4;p++) {
+				System.out.println(Genere[0][p]);
+				System.out.println(nomeGenere[0][p]);
+				System.out.println(Genere[1][p]);
+				System.out.println(nomeGenere[1][p]);
+			}
+			*/
+				JsonObject JsonStatGlob = new JsonObject();
+				JsonStatisticheGlobali.add(JsonStatGlob);
+					JsonArray JsonMaxStatiArr=new JsonArray();
+					JsonStatGlob.add("Stato con più eventi", JsonMaxStatiArr);
+						JsonObject JsonMaxStati=new JsonObject();
+						JsonMaxStatiArr.add(JsonMaxStati);
+						JsonMaxStati.addProperty("Nome", nomeStatoMax);
+						JsonMaxStati.addProperty("Eventi",maxStato);
+					JsonArray JsonMinStatiArr=new JsonArray();
+					JsonStatGlob.add("Stato con meno eventi", JsonMinStatiArr);
+						JsonObject JsonMinStati=new JsonObject();
+						JsonMinStatiArr.add(JsonMinStati);
+						JsonMinStati.addProperty("Nome", nomeStatoMin);
+						JsonMinStati.addProperty("Eventi",minStato);
+					JsonArray JsonSourceArray =new JsonArray();	
+					JsonStatGlob.add("Statistiche per Source", JsonSourceArray);
+						JsonObject JsonSourceObject = new JsonObject();
+						JsonSourceArray.add(JsonSourceObject);
+							JsonArray JsonTick = new JsonArray();
+							JsonSourceObject.add("Ticketmaster", JsonTick);
+								JsonObject JsonTickObj= new JsonObject();
+								JsonTick.add(JsonTickObj);
+									JsonArray JsonTickMax =new JsonArray();
+									JsonTickObj.add("Stato con più eventi Ticketmaster", JsonTickMax);
+										JsonObject JsonTickMaxObj= new JsonObject();
+										JsonTickMax.add(JsonTickMaxObj);
+										JsonTickMaxObj.addProperty("Nome", nomeSource[0][0]);
+										JsonTickMaxObj.addProperty("Eventi", Source[0][0]);
+									JsonArray JsonTickMin =new JsonArray();
+									JsonTickObj.add("Stato con meno eventi Ticketmaster", JsonTickMin);
+										JsonObject JsonTickMinObj= new JsonObject();
+										JsonTickMin.add(JsonTickMinObj);
+										JsonTickMinObj.addProperty("Nome", nomeSource[1][0]);
+										JsonTickMinObj.addProperty("Eventi", Source[1][0]);
+							JsonArray JsonUni = new JsonArray();
+							JsonSourceObject.add("Universe", JsonUni);
+								JsonObject JsonUniObj= new JsonObject();
+								JsonUni.add(JsonUniObj);
+									JsonArray JsonUniMax =new JsonArray();
+									JsonUniObj.add("Stato con più eventi Universe", JsonUniMax);
+										JsonObject JsonUniMaxObj= new JsonObject();
+										JsonUniMax.add(JsonUniMaxObj);
+										JsonUniMaxObj.addProperty("Nome", nomeSource[0][1]);
+										JsonUniMaxObj.addProperty("Eventi", Source[0][1]);
+									JsonArray JsonUniMin =new JsonArray();
+									JsonUniObj.add("Stato con meno eventi Universe", JsonUniMin);
+										JsonObject JsonUniMinObj= new JsonObject();
+										JsonUniMin.add(JsonUniMinObj);
+										JsonUniMinObj.addProperty("Nome", nomeSource[1][1]);
+										JsonUniMinObj.addProperty("Eventi", Source[1][1]);
+							JsonArray JsonFront = new JsonArray();
+							JsonSourceObject.add("Frontgate Tickets", JsonFront);
+								JsonObject JsonFrontObj= new JsonObject();
+								JsonFront.add(JsonFrontObj);
+									JsonArray JsonFrontMax =new JsonArray();
+									JsonFrontObj.add("Stato con più eventi Frontgate Tickets", JsonFrontMax);
+										JsonObject JsonFrontMaxObj= new JsonObject();
+										JsonFrontMax.add(JsonFrontMaxObj);
+										JsonFrontMaxObj.addProperty("Nome", nomeSource[0][2]);
+										JsonFrontMaxObj.addProperty("Eventi", Source[0][2]);
+									JsonArray JsonFrontMin =new JsonArray();
+									JsonFrontObj.add("Stato con meno eventi Frontgate Tickets", JsonFrontMin);
+										JsonObject JsonFrontMinObj= new JsonObject();
+										JsonFrontMin.add(JsonFrontMinObj);
+										JsonFrontMinObj.addProperty("Nome", nomeSource[1][2]);
+										JsonFrontMinObj.addProperty("Eventi", Source[1][2]);
+							JsonArray JsonTmr = new JsonArray();
+							JsonSourceObject.add("Ticketmaster Resale", JsonTmr);
+								JsonObject JsonTmrObj= new JsonObject();
+								JsonTmr.add(JsonTmrObj);
+									JsonArray JsonTmrMax =new JsonArray();
+									JsonTmrObj.add("Stato con più eventi Tickemaster Resale", JsonTmrMax);
+										JsonObject JsonTmrMaxObj= new JsonObject();
+										JsonTmrMax.add(JsonTmrMaxObj);
+										JsonTmrMaxObj.addProperty("Nome", nomeSource[0][3]);
+										JsonTmrMaxObj.addProperty("Eventi", Source[0][3]);
+									JsonArray JsonTmrMin =new JsonArray();
+									JsonTmrObj.add("Stato con meno eventi Ticketmaster Resale", JsonTmrMin);
+										JsonObject JsonTmrMinObj= new JsonObject();
+										JsonTmrMin.add(JsonTmrMinObj);
+										JsonTmrMinObj.addProperty("Nome", nomeSource[1][3]);
+										JsonTmrMinObj.addProperty("Eventi", Source[1][3]);
+							JsonArray JsonWeb = new JsonArray();
+							JsonSourceObject.add("Ticketweb", JsonWeb);
+								JsonObject JsonWebObj= new JsonObject();
+								JsonWeb.add(JsonWebObj);
+									JsonArray JsonWebMax =new JsonArray();
+									JsonWebObj.add("Stato con più eventi Ticketweb", JsonWebMax);
+										JsonObject JsonWebMaxObj= new JsonObject();
+										JsonWebMax.add(JsonTickMaxObj);
+										JsonWebMaxObj.addProperty("Nome", nomeSource[0][4]);
+										JsonWebMaxObj.addProperty("Eventi", Source[0][4]);
+									JsonArray JsonWebMin =new JsonArray();
+									JsonWebObj.add("Stato con meno eventi Ticketweb", JsonWebMin);
+										JsonObject JsonWebMinObj= new JsonObject();
+										JsonWebMin.add(JsonWebMinObj);
+										JsonWebMinObj.addProperty("Nome", nomeSource[1][4]);
+										JsonWebMinObj.addProperty("Eventi", Source[1][4]);
+					JsonArray JsonGenereArray =new JsonArray();	
+					JsonStatGlob.add("Statistiche per Genere", JsonGenereArray);
+						JsonObject JsonGenereObject = new JsonObject();
+						JsonGenereArray.add(JsonGenereObject);
+							JsonArray JsonMusic = new JsonArray();
+							JsonGenereObject.add("Musica", JsonMusic);
+								JsonObject JsonMusicObj= new JsonObject();
+								JsonMusic.add(JsonMusicObj);
+									JsonArray JsonMusicMax =new JsonArray();
+									JsonMusicObj.add("Stato con più eventi Musica", JsonMusicMax);
+										JsonObject JsonMusicMaxObj= new JsonObject();
+										JsonMusicMax.add(JsonMusicMaxObj);
+										JsonMusicMaxObj.addProperty("Nome", nomeGenere[0][0]);
+										JsonMusicMaxObj.addProperty("Eventi", Genere[0][0]);
+									JsonArray JsonMusicMin =new JsonArray();
+									JsonMusicObj.add("Stato con meno eventi Musica", JsonMusicMin);
+										JsonObject JsonMusicMinObj= new JsonObject();
+										JsonMusicMin.add(JsonMusicMinObj);
+										JsonMusicMinObj.addProperty("Nome", nomeGenere[1][0]);
+										JsonMusicMinObj.addProperty("Eventi", Genere[1][0]);
+							JsonArray JsonSport = new JsonArray();
+							JsonGenereObject.add("Sport", JsonSport);
+								JsonObject JsonSportObj= new JsonObject();
+								JsonSport.add(JsonSportObj);
+									JsonArray JsonSportMax =new JsonArray();
+									JsonSportObj.add("Stato con più eventi Sport", JsonSportMax);
+										JsonObject JsonSportMaxObj= new JsonObject();
+										JsonSportMax.add(JsonSportMaxObj);
+										JsonSportMaxObj.addProperty("Nome", nomeGenere[0][1]);
+										JsonSportMaxObj.addProperty("Eventi", Genere[0][1]);
+									JsonArray JsonSportMin =new JsonArray();
+									JsonSportObj.add("Stato con meno eventi Sport", JsonSportMin);
+										JsonObject JsonSportMinObj= new JsonObject();
+										JsonSportMin.add(JsonSportMinObj);
+										JsonSportMinObj.addProperty("Nome", nomeGenere[1][1]);
+										JsonSportMinObj.addProperty("Eventi", Genere[1][1]);
+							JsonArray JsonArt = new JsonArray();
+							JsonGenereObject.add("Arte e Teatro", JsonArt);
+								JsonObject JsonArtObj= new JsonObject();
+								JsonArt.add(JsonArtObj);
+									JsonArray JsonArtMax =new JsonArray();
+									JsonArtObj.add("Stato con più eventi Arte e Teatro", JsonArtMax);
+										JsonObject JsonArtMaxObj= new JsonObject();
+										JsonArtMax.add(JsonArtMaxObj);
+										JsonArtMaxObj.addProperty("Nome", nomeGenere[0][2]);
+										JsonArtMaxObj.addProperty("Eventi", Genere[0][2]);
+									JsonArray JsonArtMin =new JsonArray();
+									JsonArtObj.add("Stato con meno eventi Arte e Teatro", JsonArtMin);
+										JsonObject JsonArtMinObj= new JsonObject();
+										JsonArtMin.add(JsonArtMinObj);
+										JsonArtMinObj.addProperty("Nome", nomeGenere[1][2]);
+										JsonArtMinObj.addProperty("Eventi", Genere[1][2]);
+							JsonArray JsonMix = new JsonArray();
+							JsonGenereObject.add("Misto", JsonMix);
+								JsonObject JsonMixObj= new JsonObject();
+								JsonMix.add(JsonMixObj);
+									JsonArray JsonMixMax =new JsonArray();
+									JsonMixObj.add("Stato con più eventi Misti", JsonMixMax);
+										JsonObject JsonMixMaxObj= new JsonObject();
+										JsonMixMax.add(JsonMixMaxObj);
+										JsonMixMaxObj.addProperty("Nome", nomeGenere[0][3]);
+										JsonMixMaxObj.addProperty("Eventi", Genere[0][3]);
+									JsonArray JsonMixMin =new JsonArray();
+									JsonMixObj.add("Stato con meno eventi Misti", JsonMixMin);
+										JsonObject JsonMixMinObj= new JsonObject();
+										JsonMixMin.add(JsonMixMinObj);
+										JsonMixMinObj.addProperty("Nome", nomeGenere[1][3]);
+										JsonMixMinObj.addProperty("Eventi", Genere[1][3]);
 			
 		
 		}catch (JsonSyntaxException e) {

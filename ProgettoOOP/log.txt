@@ -6,3 +6,7 @@ Errore avvenuto in data :Wed Mar 03 18:18:09 CET 2021
 Errore avvenuto in data :Thu Mar 04 20:38:32 CET 2021
      Causa: ERRORE DURANTE LA RICHIESTA EVENTO
      Dettagli: Server returned HTTP response code: 400 for URL: https://app.ticketmaster.com/discovery/v2/events.json?stateCode=FL&countryCode=US&apikey=02znw2Zzu1vGIRauqzXnI595CY7TlXX1&page=6&size=199
+
+Errore avvenuto in data :Tue Mar 09 20:24:03 CET 2021
+     Causa: ERRORE DURANTE LA RICHIESTA EVENTO
+     Dettagli: Server returned HTTP response code: 429 for URL: https://app.ticketmaster.com/discovery/v2/events.json?stateCode=AL&countryCode=US&source=ticketweb&apikey=02znw2Zzu1vGIRauqzXnI595CY7TlXX1&size=199
