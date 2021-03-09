@@ -85,8 +85,8 @@ public class Controller {
 			JsonArray array_sigle = jo.get("sigle").getAsJsonArray();
 			JsonArray array_source = jo.get("source").getAsJsonArray();
 			JsonArray array_generi = jo.get("generi").getAsJsonArray();
-			for (int i = 0; i < array_sigle.size(); i++) {
-				Stato s= new Stato();
+			Stato s= new Stato();
+			for (int i = 0; i < array_sigle.size(); i++) {			
 				String ursigle="https://app.ticketmaster.com/discovery/v2/events.json?stateCode="+array_sigle.get(i).getAsString()+"&countryCode=US&apikey=02znw2Zzu1vGIRauqzXnI595CY7TlXX1&page=0&size=199";
 				 String statsigle=CercaEvento.getEvento(ursigle);
 				 JsonObject Objsigle = (JsonObject)JsonParser.parseString(statsigle);
