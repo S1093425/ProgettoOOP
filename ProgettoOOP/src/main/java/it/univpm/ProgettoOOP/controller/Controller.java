@@ -76,7 +76,9 @@ public class Controller {
 		ArrayList<Stato> stati = new ArrayList<Stato>();
 		JsonObject JsonFinale= new JsonObject();
 		JsonArray JsonStatistiche= new JsonArray();
-		JsonFinale.add("Statistiche", JsonStatistiche );
+		JsonFinale.add("Statistiche", JsonStatistiche);
+		JsonArray JsonStatisticheGlobali= new JsonArray();
+		JsonFinale.add("Statistiche Globali", JsonStatisticheGlobali);
 		try {
 			BufferedReader buffer = new BufferedReader(new FileReader(new File("sigle.json")));
 			JsonObject jo = JsonParser.parseReader(buffer).getAsJsonObject(); 
@@ -141,7 +143,7 @@ public class Controller {
 			}
 			buffer.close();
 
-			int maxStato=0; int minStato=0;String nomeStatoMax;String nomeStatoMin;
+			int maxStato=0; int minStato=0;String nomeStatoMax="";String nomeStatoMin="";
 			String[][] nomeSource = new String[2][5];
 			int[][] Source= {{0,0,0,0,0},{0,0,0,0,0}};
 			String[][] nomeGenere= new String[2][4];
@@ -235,10 +237,91 @@ public class Controller {
 				 if (Genere[1][3]>stati.get(i).getGeneri()[3]) {
 					 nomeGenere[1][3]=stati.get(i).getStateCode();
 					 Genere[1][3]=stati.get(i).getGeneri()[3];
-				 }
-				 
-				 
+				 } 
 			 }
+			JsonObject JsonStatGlob = new JsonObject();
+			JsonStatisticheGlobali.add(JsonStatGlob);
+			JsonObject JsonMaxStati = new JsonObject();
+			JsonMaxStati.add("Stato con il maggior numero di eventi", JsonMaxStati);
+			JsonMaxStati.addProperty("Nome", nomeStatoMax);
+			JsonMaxStati.addProperty("Eventi",maxStato);
+			JsonObject JsonMinStati = new JsonObject();
+			JsonMinStati.add("Stato con il minor numero di eventi", JsonMinStati);
+			JsonMinStati.addProperty("Nome", nomeStatoMin);
+			JsonMinStati.addProperty("Eventi",minStato);
+			/*JsonObject JsonMaxStati = new JsonObject();
+			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
+			JsonStatGlob.addProperty("Nome", nomeStatoMax);
+			JsonStatGlob.addProperty("Eventi",maxStato);
+			JsonObject JsonMaxStati = new JsonObject();
+			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
+			JsonStatGlob.addProperty("Nome", nomeStatoMax);
+			JsonStatGlob.addProperty("Eventi",maxStato);
+			JsonObject JsonMaxStati = new JsonObject();
+			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
+			JsonStatGlob.addProperty("Nome", nomeStatoMax);
+			JsonStatGlob.addProperty("Eventi",maxStato);
+			JsonObject JsonMaxStati = new JsonObject();
+			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
+			JsonStatGlob.addProperty("Nome", nomeStatoMax);
+			JsonStatGlob.addProperty("Eventi",maxStato);
+			JsonObject JsonMaxStati = new JsonObject();
+			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
+			JsonStatGlob.addProperty("Nome", nomeStatoMax);
+			JsonStatGlob.addProperty("Eventi",maxStato);
+			JsonObject JsonMaxStati = new JsonObject();
+			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
+			JsonStatGlob.addProperty("Nome", nomeStatoMax);
+			JsonStatGlob.addProperty("Eventi",maxStato);
+			JsonObject JsonMaxStati = new JsonObject();
+			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
+			JsonStatGlob.addProperty("Nome", nomeStatoMax);
+			JsonStatGlob.addProperty("Eventi",maxStato);
+			JsonObject JsonMaxStati = new JsonObject();
+			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
+			JsonStatGlob.addProperty("Nome", nomeStatoMax);
+			JsonStatGlob.addProperty("Eventi",maxStato);
+			JsonObject JsonMaxStati = new JsonObject();
+			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
+			JsonStatGlob.addProperty("Nome", nomeStatoMax);
+			JsonStatGlob.addProperty("Eventi",maxStato);
+			JsonObject JsonMaxStati = new JsonObject();
+			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
+			JsonStatGlob.addProperty("Nome", nomeStatoMax);
+			JsonStatGlob.addProperty("Eventi",maxStato);
+			JsonObject JsonMaxStati = new JsonObject();
+			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
+			JsonStatGlob.addProperty("Nome", nomeStatoMax);
+			JsonStatGlob.addProperty("Eventi",maxStato);
+			JsonObject JsonMaxStati = new JsonObject();
+			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
+			JsonStatGlob.addProperty("Nome", nomeStatoMax);
+			JsonStatGlob.addProperty("Eventi",maxStato);
+			JsonObject JsonMaxStati = new JsonObject();
+			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
+			JsonStatGlob.addProperty("Nome", nomeStatoMax);
+			JsonStatGlob.addProperty("Eventi",maxStato);
+			JsonObject JsonMaxStati = new JsonObject();
+			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
+			JsonStatGlob.addProperty("Nome", nomeStatoMax);
+			JsonStatGlob.addProperty("Eventi",maxStato);
+			JsonObject JsonMaxStati = new JsonObject();
+			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
+			JsonStatGlob.addProperty("Nome", nomeStatoMax);
+			JsonStatGlob.addProperty("Eventi",maxStato);
+			JsonObject JsonMaxStati = new JsonObject();
+			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
+			JsonStatGlob.addProperty("Nome", nomeStatoMax);
+			JsonStatGlob.addProperty("Eventi",maxStato);
+			JsonObject JsonMaxStati = new JsonObject();
+			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
+			JsonStatGlob.addProperty("Nome", nomeStatoMax);
+			JsonStatGlob.addProperty("Eventi",maxStato);
+			JsonObject JsonMaxStati = new JsonObject();
+			JsonStatGlob.add("Stato con il maggior di eventi", JsonMaxStati);
+			JsonStatGlob.addProperty("Nome", nomeStatoMax);
+			JsonStatGlob.addProperty("Eventi",maxStato);*/
+			
 		
 		}catch (JsonSyntaxException e) {
 			Log.report("FILE sigle.json NON TROVATO", e.getMessage());
