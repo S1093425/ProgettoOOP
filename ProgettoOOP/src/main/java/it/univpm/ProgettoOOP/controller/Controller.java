@@ -173,6 +173,7 @@ public class Controller {
 					 statsGeneriMin=statistiche.getMaxGenere(statsGeneriMin, stati.get(i));
 				 }
 			}
+			System.out.println("Stats");
 			System.out.println(statsTot.get(0).getEventi_Totali());
 			System.out.println(statsTot.get(1).getEventi_Totali());
 			System.out.println("-----------------");
