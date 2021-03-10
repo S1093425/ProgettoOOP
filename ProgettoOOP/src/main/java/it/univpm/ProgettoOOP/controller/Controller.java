@@ -176,7 +176,7 @@ public class Controller {
 			System.out.println("Stats");
 			System.out.println(statsTot.get(0).getEventi_Totali());
 			System.out.println(statsTot.get(1).getEventi_Totali());
-			System.out.println("-----------------");
+			System.out.println("----------------");
 			System.out.println(statsSourceMax.get(0).getTicketmaster());
 			System.out.println(statsSourceMin.get(0).getTicketmaster());
 			System.out.println(statsSourceMax.get(1).getUniverse());
