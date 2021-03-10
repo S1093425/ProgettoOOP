@@ -142,161 +142,56 @@ public class Controller {
 				JsonSource.addProperty("Ticketweb", s.getSource()[4]);
 			}
 			buffer.close();
-
-			int maxStato=stati.get(0).getEventi_Totali(); int minStato=stati.get(0).getEventi_Totali();
-			String nomeStatoMax=stati.get(0).getStateCode();String nomeStatoMin=stati.get(0).getStateCode();
-			String[][] nomeSource = new String[2][5];
-			int[][] Source= new int[2][5];
-			for(int i=0; i<5;i++) {
-				nomeSource[0][i]=stati.get(0).getStateCode();
-				nomeSource[1][i]=stati.get(0).getStateCode();
-				Source[0]=stati.get(0).getSource();
-				Source[1]=stati.get(0).getSource();
-			}			
-			String[][] nomeGenere= new String[2][4];
-			int[][] Genere= new int[2][4];
-			for(int i=0; i<4;i++) {
-				nomeGenere[0][i]=stati.get(0).getStateCode();
-				nomeGenere[1][i]=stati.get(0).getStateCode();
-				Genere[0]=stati.get(0).getGeneri();
-				Genere[1]=stati.get(0).getGeneri();
-			}
-			for(int p=0;p<5;p++) {
-				System.out.println(Source[0][p]);
-				System.out.println(nomeSource[0][p]);
-				System.out.println(Source[1][p]);
-				System.out.println(nomeSource[1][p]);
-			}
-			for(int i=1;i<stati.size();i++) {
-				 if (maxStato<stati.get(i).getEventi_Totali()) {
-					 nomeStatoMax=stati.get(i).getStateCode();
-					 maxStato=stati.get(i).getEventi_Totali();
-				 }
-				 if (minStato>stati.get(i).getEventi_Totali()) {
-					 nomeStatoMin=stati.get(i).getStateCode();
-					 minStato=stati.get(i).getEventi_Totali();
-				 }
-				 System.out.println("------------------");
-				 System.out.println("max:"+nomeSource[0][0]);
-				 System.out.println("max:"+Source[0][0]);
-				 System.out.println("------------------");
-				 System.out.println("min:"+nomeSource[1][0]);
-				 System.out.println("min:"+Source[1][0]);
-				 if (Source[0][0]<stati.get(i).getSource()[0]) {					 
-					 nomeSource[0][0]=stati.get(i).getStateCode();
-					 Source[0][0]=stati.get(i).getSource()[0];
+			
+			
+			ArrayList<Stato> statsTot = new ArrayList<Stato>();
+			ArrayList<Stato> statsSource = new ArrayList<Stato>();
+			ArrayList<Stato> statsGeneri = new ArrayList<Stato>();
+			for(int i=0;i<stati.size();i++) {
+				 if(i==0) {
+					for(int j=0;j<2;j++)
+						statsTot.add(stati.get(i));
+					for(int j=0;j<10;j++)
+						statsSource.add(stati.get(i));
+					for(int j=0;j<8;j++)
+						statsGeneri.add(stati.get(i));
 				 }
 				 
-				 if (Source[1][0]>stati.get(i).getSource()[0]) {
-					 nomeSource[1][0]=stati.get(i).getStateCode();
-					 Source[1][0]=stati.get(i).getSource()[0];
+				 if (statsTot.get(0).getEventi_Totali()<stati.get(i).getEventi_Totali())
+					 statsTot.set(0, stati.get(i));
+				 if (statsTot.get(1).getEventi_Totali()>stati.get(i).getEventi_Totali()) 
+					 statsTot.set(1, stati.get(i));
+				 
+				 for(int j=0;j<5;j++) {				
+					 if (statsSource.get(j).getSource()[j]<stati.get(i).getSource()[j]) 
+						 statsSource.set(j, stati.get(i));				 
+					 if (statsSource.get(j).getSource()[j]>stati.get(i).getSource()[j])
+						 statsSource.set(j, stati.get(i));
 				 }
-
-				 /*
-				 if (Source[0][1]>stati.get(i).getSource()[1]) {
-					 nomeSource[0][1]=stati.get(i).getStateCode();
-					 Source[0][1]=stati.get(i).getSource()[1];
+				 
+				 for(int j=0;j<4;j++) {				
+					 if (statsGeneri.get(j).getGeneri()[j]<stati.get(i).getGeneri()[j]) 
+						 statsGeneri.set(j, stati.get(i));				 
+					 if (statsGeneri.get(j).getGeneri()[j]>stati.get(i).getGeneri()[j])
+						 statsGeneri.set(j, stati.get(i));
 				 }
-				 if (Source[1][1]>stati.get(i).getSource()[1]) {
-					 nomeSource[1][1]=stati.get(i).getStateCode();
-					 Source[1][1]=stati.get(i).getSource()[1];
-				 }
-				 if (Source[0][2]>stati.get(i).getSource()[2]) {
-					 nomeSource[0][2]=stati.get(i).getStateCode();
-					 Source[0][2]=stati.get(i).getSource()[2];
-				 }
-				 if (Source[1][2]>stati.get(i).getSource()[2]) {
-					 nomeSource[1][2]=stati.get(i).getStateCode();
-					 Source[1][2]=stati.get(i).getSource()[2];
-				 }
-
-				 if (Source[0][3]>stati.get(i).getSource()[3]) {
-					 nomeSource[0][3]=stati.get(i).getStateCode();
-					 Source[0][3]=stati.get(i).getSource()[3];
-				 }
-				 if (Source[1][3]>stati.get(i).getSource()[3]) {
-					 nomeSource[1][3]=stati.get(i).getStateCode();
-					 Source[1][3]=stati.get(i).getSource()[3];
-				 }
-
-				 if (Source[0][4]>stati.get(i).getSource()[4]) {
-					 nomeSource[0][4]=stati.get(i).getStateCode();
-					 Source[0][4]=stati.get(i).getSource()[4];
-				 }
-				 if (Source[1][4]>stati.get(i).getSource()[4]) {
-					 nomeSource[1][4]=stati.get(i).getStateCode();
-					 Source[1][4]=stati.get(i).getSource()[4];
-				 }
-
-				 if (Genere[0][0]<stati.get(i).getGeneri()[0]) {
-					 nomeGenere[0][0]=stati.get(i).getStateCode();
-					 Genere[0][0]=stati.get(i).getGeneri()[0];
-				 }
-				 if (Genere[1][0]>stati.get(i).getGeneri()[0]) {
-					 nomeGenere[1][0]=stati.get(i).getStateCode();
-					 Genere[1][0]=stati.get(i).getGeneri()[0];
-				 }
-
-				 if (Genere[0][1]<stati.get(i).getGeneri()[1]) {
-					 nomeGenere[0][1]=stati.get(i).getStateCode();
-					 Genere[0][1]=stati.get(i).getGeneri()[1];
-				 }
-				 if (Genere[1][1]>stati.get(i).getGeneri()[1]) {
-					 nomeGenere[1][1]=stati.get(i).getStateCode();
-					 Genere[1][1]=stati.get(i).getGeneri()[1];
-				 }
-
-				 if (Genere[0][2]<stati.get(i).getGeneri()[2]) {
-					 nomeGenere[0][2]=stati.get(i).getStateCode();
-					 Genere[0][2]=stati.get(i).getGeneri()[2];
-				 }
-				 if (Genere[1][2]>stati.get(i).getGeneri()[2]) {
-					 nomeGenere[1][2]=stati.get(i).getStateCode();
-					 Genere[1][2]=stati.get(i).getGeneri()[2];
-				 }
-
-				 if (Genere[0][3]<stati.get(i).getGeneri()[3]) {
-					 nomeGenere[0][3]=stati.get(i).getStateCode();
-					 Genere[0][3]=stati.get(i).getGeneri()[3];
-				 }
-				 if (Genere[1][3]>stati.get(i).getGeneri()[3]) {
-					 nomeGenere[1][3]=stati.get(i).getStateCode();
-					 Genere[1][3]=stati.get(i).getGeneri()[3];
-				 } */
 			 }
-			 /*
-				System.out.println(maxStato);
-				System.out.println(nomeStatoMax);
-				
-				System.out.println(minStato);
-			System.out.println(nomeStatoMin);
-			for(int p=0;p<5;p++) {
-				System.out.println(Source[0][p]);
-				System.out.println(nomeSource[0][p]);
-				System.out.println(Source[1][p]);
-				System.out.println(nomeSource[1][p]);
-			}
-			for(int p=0;p<4;p++) {
-				System.out.println(Genere[0][p]);
-				System.out.println(nomeGenere[0][p]);
-				System.out.println(Genere[1][p]);
-				System.out.println(nomeGenere[1][p]);
-			}
-			*/
+			
+			
 				JsonObject JsonStatGlob = new JsonObject();
 				JsonStatisticheGlobali.add(JsonStatGlob);
 					JsonArray JsonMaxStatiArr=new JsonArray();
 					JsonStatGlob.add("Stato con più eventi", JsonMaxStatiArr);
 						JsonObject JsonMaxStati=new JsonObject();
 						JsonMaxStatiArr.add(JsonMaxStati);
-						JsonMaxStati.addProperty("Nome", nomeStatoMax);
-						JsonMaxStati.addProperty("Eventi",maxStato);
+						JsonMaxStati.addProperty("Nome", statsTot.get(0).getStateCode());
+						JsonMaxStati.addProperty("Eventi",statsTot.get(0).getEventi_Totali());
 					JsonArray JsonMinStatiArr=new JsonArray();
 					JsonStatGlob.add("Stato con meno eventi", JsonMinStatiArr);
 						JsonObject JsonMinStati=new JsonObject();
 						JsonMinStatiArr.add(JsonMinStati);
-						JsonMinStati.addProperty("Nome", nomeStatoMin);
-						JsonMinStati.addProperty("Eventi",minStato);
+						JsonMinStati.addProperty("Nome", statsTot.get(1).getStateCode());
+						JsonMinStati.addProperty("Eventi",statsTot.get(2).getEventi_Totali());
 					JsonArray JsonSourceArray =new JsonArray();	
 					JsonStatGlob.add("Statistiche per Source", JsonSourceArray);
 						JsonObject JsonSourceObject = new JsonObject();
@@ -309,14 +204,14 @@ public class Controller {
 									JsonTickObj.add("Stato con più eventi Ticketmaster", JsonTickMax);
 										JsonObject JsonTickMaxObj= new JsonObject();
 										JsonTickMax.add(JsonTickMaxObj);
-										JsonTickMaxObj.addProperty("Nome", nomeSource[0][0]);
-										JsonTickMaxObj.addProperty("Eventi", Source[0][0]);
+										JsonTickMaxObj.addProperty("Nome", statsSource.get(0).getStateCode());
+										JsonTickMaxObj.addProperty("Eventi", statsSource.get(0).getSource()[0]);
 									JsonArray JsonTickMin =new JsonArray();
 									JsonTickObj.add("Stato con meno eventi Ticketmaster", JsonTickMin);
 										JsonObject JsonTickMinObj= new JsonObject();
 										JsonTickMin.add(JsonTickMinObj);
-										JsonTickMinObj.addProperty("Nome", nomeSource[1][0]);
-										JsonTickMinObj.addProperty("Eventi", Source[1][0]);
+										JsonTickMinObj.addProperty("Nome", statsSource.get(1).getStateCode());
+										JsonTickMinObj.addProperty("Eventi", statsSource.get(1).getSource()[0]);
 							JsonArray JsonUni = new JsonArray();
 							JsonSourceObject.add("Universe", JsonUni);
 								JsonObject JsonUniObj= new JsonObject();
@@ -325,14 +220,14 @@ public class Controller {
 									JsonUniObj.add("Stato con più eventi Universe", JsonUniMax);
 										JsonObject JsonUniMaxObj= new JsonObject();
 										JsonUniMax.add(JsonUniMaxObj);
-										JsonUniMaxObj.addProperty("Nome", nomeSource[0][1]);
-										JsonUniMaxObj.addProperty("Eventi", Source[0][1]);
+										JsonUniMaxObj.addProperty("Nome", statsSource.get(2).getStateCode());
+										JsonUniMaxObj.addProperty("Eventi", statsSource.get(2).getSource()[1]);
 									JsonArray JsonUniMin =new JsonArray();
 									JsonUniObj.add("Stato con meno eventi Universe", JsonUniMin);
 										JsonObject JsonUniMinObj= new JsonObject();
 										JsonUniMin.add(JsonUniMinObj);
-										JsonUniMinObj.addProperty("Nome", nomeSource[1][1]);
-										JsonUniMinObj.addProperty("Eventi", Source[1][1]);
+										JsonUniMinObj.addProperty("Nome", statsSource.get(3).getStateCode());
+										JsonUniMinObj.addProperty("Eventi", statsSource.get(3).getSource()[1]);
 							JsonArray JsonFront = new JsonArray();
 							JsonSourceObject.add("Frontgate Tickets", JsonFront);
 								JsonObject JsonFrontObj= new JsonObject();
@@ -341,14 +236,14 @@ public class Controller {
 									JsonFrontObj.add("Stato con più eventi Frontgate Tickets", JsonFrontMax);
 										JsonObject JsonFrontMaxObj= new JsonObject();
 										JsonFrontMax.add(JsonFrontMaxObj);
-										JsonFrontMaxObj.addProperty("Nome", nomeSource[0][2]);
-										JsonFrontMaxObj.addProperty("Eventi", Source[0][2]);
+										JsonFrontMaxObj.addProperty("Nome", statsSource.get(4).getStateCode());
+										JsonFrontMaxObj.addProperty("Eventi", statsSource.get(4).getSource()[2]);
 									JsonArray JsonFrontMin =new JsonArray();
 									JsonFrontObj.add("Stato con meno eventi Frontgate Tickets", JsonFrontMin);
 										JsonObject JsonFrontMinObj= new JsonObject();
 										JsonFrontMin.add(JsonFrontMinObj);
-										JsonFrontMinObj.addProperty("Nome", nomeSource[1][2]);
-										JsonFrontMinObj.addProperty("Eventi", Source[1][2]);
+										JsonFrontMinObj.addProperty("Nome", statsSource.get(5).getStateCode());
+										JsonFrontMinObj.addProperty("Eventi", statsSource.get(5).getSource()[2]);
 							JsonArray JsonTmr = new JsonArray();
 							JsonSourceObject.add("Ticketmaster Resale", JsonTmr);
 								JsonObject JsonTmrObj= new JsonObject();
@@ -357,14 +252,14 @@ public class Controller {
 									JsonTmrObj.add("Stato con più eventi Tickemaster Resale", JsonTmrMax);
 										JsonObject JsonTmrMaxObj= new JsonObject();
 										JsonTmrMax.add(JsonTmrMaxObj);
-										JsonTmrMaxObj.addProperty("Nome", nomeSource[0][3]);
-										JsonTmrMaxObj.addProperty("Eventi", Source[0][3]);
+										JsonTmrMaxObj.addProperty("Nome", statsSource.get(6).getStateCode());
+										JsonTmrMaxObj.addProperty("Eventi", statsSource.get(6).getSource()[3]);
 									JsonArray JsonTmrMin =new JsonArray();
 									JsonTmrObj.add("Stato con meno eventi Ticketmaster Resale", JsonTmrMin);
 										JsonObject JsonTmrMinObj= new JsonObject();
 										JsonTmrMin.add(JsonTmrMinObj);
-										JsonTmrMinObj.addProperty("Nome", nomeSource[1][3]);
-										JsonTmrMinObj.addProperty("Eventi", Source[1][3]);
+										JsonTmrMinObj.addProperty("Nome", statsSource.get(7).getStateCode());
+										JsonTmrMinObj.addProperty("Eventi", statsSource.get(7).getSource()[3]);
 							JsonArray JsonWeb = new JsonArray();
 							JsonSourceObject.add("Ticketweb", JsonWeb);
 								JsonObject JsonWebObj= new JsonObject();
@@ -373,14 +268,14 @@ public class Controller {
 									JsonWebObj.add("Stato con più eventi Ticketweb", JsonWebMax);
 										JsonObject JsonWebMaxObj= new JsonObject();
 										JsonWebMax.add(JsonTickMaxObj);
-										JsonWebMaxObj.addProperty("Nome", nomeSource[0][4]);
-										JsonWebMaxObj.addProperty("Eventi", Source[0][4]);
+										JsonWebMaxObj.addProperty("Nome", statsSource.get(8).getStateCode());
+										JsonWebMaxObj.addProperty("Eventi", statsSource.get(8).getSource()[4]);
 									JsonArray JsonWebMin =new JsonArray();
 									JsonWebObj.add("Stato con meno eventi Ticketweb", JsonWebMin);
 										JsonObject JsonWebMinObj= new JsonObject();
 										JsonWebMin.add(JsonWebMinObj);
-										JsonWebMinObj.addProperty("Nome", nomeSource[1][4]);
-										JsonWebMinObj.addProperty("Eventi", Source[1][4]);
+										JsonWebMinObj.addProperty("Nome", statsSource.get(9).getStateCode());
+										JsonWebMinObj.addProperty("Eventi", statsSource.get(9).getSource()[4]);
 					JsonArray JsonGenereArray =new JsonArray();	
 					JsonStatGlob.add("Statistiche per Genere", JsonGenereArray);
 						JsonObject JsonGenereObject = new JsonObject();
@@ -393,14 +288,14 @@ public class Controller {
 									JsonMusicObj.add("Stato con più eventi Musica", JsonMusicMax);
 										JsonObject JsonMusicMaxObj= new JsonObject();
 										JsonMusicMax.add(JsonMusicMaxObj);
-										JsonMusicMaxObj.addProperty("Nome", nomeGenere[0][0]);
-										JsonMusicMaxObj.addProperty("Eventi", Genere[0][0]);
+										JsonMusicMaxObj.addProperty("Nome", statsGeneri.get(0).getStateCode());
+										JsonMusicMaxObj.addProperty("Eventi", statsSource.get(0).getSource()[0]);
 									JsonArray JsonMusicMin =new JsonArray();
 									JsonMusicObj.add("Stato con meno eventi Musica", JsonMusicMin);
 										JsonObject JsonMusicMinObj= new JsonObject();
 										JsonMusicMin.add(JsonMusicMinObj);
-										JsonMusicMinObj.addProperty("Nome", nomeGenere[1][0]);
-										JsonMusicMinObj.addProperty("Eventi", Genere[1][0]);
+										JsonMusicMinObj.addProperty("Nome", statsSource.get(1).getStateCode());
+										JsonMusicMinObj.addProperty("Eventi", statsSource.get(1).getSource()[0]);
 							JsonArray JsonSport = new JsonArray();
 							JsonGenereObject.add("Sport", JsonSport);
 								JsonObject JsonSportObj= new JsonObject();
@@ -409,14 +304,14 @@ public class Controller {
 									JsonSportObj.add("Stato con più eventi Sport", JsonSportMax);
 										JsonObject JsonSportMaxObj= new JsonObject();
 										JsonSportMax.add(JsonSportMaxObj);
-										JsonSportMaxObj.addProperty("Nome", nomeGenere[0][1]);
-										JsonSportMaxObj.addProperty("Eventi", Genere[0][1]);
+										JsonSportMaxObj.addProperty("Nome", statsSource.get(2).getStateCode());
+										JsonSportMaxObj.addProperty("Eventi", statsSource.get(2).getSource()[1]);
 									JsonArray JsonSportMin =new JsonArray();
 									JsonSportObj.add("Stato con meno eventi Sport", JsonSportMin);
 										JsonObject JsonSportMinObj= new JsonObject();
 										JsonSportMin.add(JsonSportMinObj);
-										JsonSportMinObj.addProperty("Nome", nomeGenere[1][1]);
-										JsonSportMinObj.addProperty("Eventi", Genere[1][1]);
+										JsonSportMinObj.addProperty("Nome", statsSource.get(3).getStateCode());
+										JsonSportMinObj.addProperty("Eventi", statsSource.get(3).getSource()[1]);
 							JsonArray JsonArt = new JsonArray();
 							JsonGenereObject.add("Arte e Teatro", JsonArt);
 								JsonObject JsonArtObj= new JsonObject();
@@ -425,14 +320,14 @@ public class Controller {
 									JsonArtObj.add("Stato con più eventi Arte e Teatro", JsonArtMax);
 										JsonObject JsonArtMaxObj= new JsonObject();
 										JsonArtMax.add(JsonArtMaxObj);
-										JsonArtMaxObj.addProperty("Nome", nomeGenere[0][2]);
-										JsonArtMaxObj.addProperty("Eventi", Genere[0][2]);
+										JsonArtMaxObj.addProperty("Nome", statsSource.get(4).getStateCode());
+										JsonArtMaxObj.addProperty("Eventi", statsSource.get(4).getSource()[2]);
 									JsonArray JsonArtMin =new JsonArray();
 									JsonArtObj.add("Stato con meno eventi Arte e Teatro", JsonArtMin);
 										JsonObject JsonArtMinObj= new JsonObject();
 										JsonArtMin.add(JsonArtMinObj);
-										JsonArtMinObj.addProperty("Nome", nomeGenere[1][2]);
-										JsonArtMinObj.addProperty("Eventi", Genere[1][2]);
+										JsonArtMinObj.addProperty("Nome", statsSource.get(5).getStateCode());
+										JsonArtMinObj.addProperty("Eventi", statsSource.get(5).getSource()[2]);
 							JsonArray JsonMix = new JsonArray();
 							JsonGenereObject.add("Misto", JsonMix);
 								JsonObject JsonMixObj= new JsonObject();
@@ -441,14 +336,14 @@ public class Controller {
 									JsonMixObj.add("Stato con più eventi Misti", JsonMixMax);
 										JsonObject JsonMixMaxObj= new JsonObject();
 										JsonMixMax.add(JsonMixMaxObj);
-										JsonMixMaxObj.addProperty("Nome", nomeGenere[0][3]);
-										JsonMixMaxObj.addProperty("Eventi", Genere[0][3]);
+										JsonMixMaxObj.addProperty("Nome", statsSource.get(6).getStateCode());
+										JsonMixMaxObj.addProperty("Eventi", statsSource.get(6).getSource()[3]);
 									JsonArray JsonMixMin =new JsonArray();
 									JsonMixObj.add("Stato con meno eventi Misti", JsonMixMin);
 										JsonObject JsonMixMinObj= new JsonObject();
 										JsonMixMin.add(JsonMixMinObj);
-										JsonMixMinObj.addProperty("Nome", nomeGenere[1][3]);
-										JsonMixMinObj.addProperty("Eventi", Genere[1][3]);
+										JsonMixMinObj.addProperty("Nome", statsSource.get(7).getStateCode());
+										JsonMixMinObj.addProperty("Eventi", statsSource.get(7).getSource()[3]);
 			
 		
 		}catch (JsonSyntaxException e) {
