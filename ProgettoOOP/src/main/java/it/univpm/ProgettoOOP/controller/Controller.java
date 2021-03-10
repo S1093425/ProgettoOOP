@@ -172,50 +172,6 @@ public class Controller {
 					 statsGeneriMax=statistiche.getMaxGenere(statsGeneriMax, stati.get(i));
 					 statsGeneriMin=statistiche.getMaxGenere(statsGeneriMin, stati.get(i));
 				 }
-<<<<<<< HEAD
-				 
-				 if (statsTot.get(0).getEventi_Totali()<stati.get(i).getEventi_Totali())
-					 statsTot.set(0, stati.get(i));
-				 if (statsTot.get(1).getEventi_Totali()>stati.get(i).getEventi_Totali()) 
-					 statsTot.set(1, stati.get(i));
-				 
-				 for(int j=0;j<5;j++) {	
-					 /*System.out.println("Prima-----------------------------");
-					 System.out.println(statsSource.get(j).getSource()[j]);
-					 System.out.println(statsSource.get(j+1).getSource()[j]);
-					 System.out.println(stati.get(i).getSource()[j]);
-					 System.out.println("-----------------------------");*/
-					 if (statsSource.get(j).getSource()[j]<stati.get(i).getSource()[j]) 
-						 statsSource.set(j, stati.get(i));				 
-					 if (statsSource.get(j+1).getSource()[j]>stati.get(i).getSource()[j])
-						 statsSource.set(j+1, stati.get(i));
-					 /*System.out.println("Dopo-----------------------------");
-					 System.out.println(statsSource.get(j).getSource()[j]);
-					 System.out.println(statsSource.get(j+1).getSource()[j]);
-					 System.out.println(stati.get(i).getSource()[j]);
-					 System.out.println("-----------------------------");*/
-				 }
-				 
-				 for(int j=0;j<4;j++) {				
-					 if (statsGeneri.get(j).getGeneri()[j]<stati.get(i).getGeneri()[j]) 
-						 statsGeneri.set(j, stati.get(i));				 
-					 if (statsGeneri.get(j+1).getGeneri()[j]>stati.get(i).getGeneri()[j])
-						 statsGeneri.set(j+1, stati.get(i));
-				 }
-			 }
-			
-			for(int j=0;j<2;j++)
-				System.out.println(statsTot.get(j).getEventi_Totali());
-			for(int j=0;j<5;j++) {
-				System.out.println(statsSource.get(j).getSource()[j]);
-				System.out.println(statsSource.get(j+1).getSource()[j]);
-			}
-			for(int j=0;j<4;j++){
-				System.out.println(statsGeneri.get(j).getGeneri()[j]);
-				System.out.println(statsGeneri.get(j+1).getGeneri()[j]);
-			}
-			
-=======
 			}
 			System.out.println("Stats");
 			System.out.println(statsTot.get(0).getEventi_Totali());
@@ -240,7 +196,6 @@ public class Controller {
 			System.out.println(statsGeneriMin.get(2).getArt());
 			System.out.println(statsGeneriMax.get(3).getMix());
 			System.out.println(statsGeneriMin.get(3).getMix());
->>>>>>> branch 'master' of https://github.com/S1093425/ProgettoOOP.git
 			
 				JsonObject JsonStatGlob = new JsonObject();
 				JsonStatisticheGlobali.add(JsonStatGlob);
@@ -352,24 +307,14 @@ public class Controller {
 									JsonMusicObj.add("Stato con più eventi Musica", JsonMusicMax);
 										JsonObject JsonMusicMaxObj= new JsonObject();
 										JsonMusicMax.add(JsonMusicMaxObj);
-<<<<<<< HEAD
-										JsonMusicMaxObj.addProperty("Nome", statsGeneri.get(0).getStateCode());
-										JsonMusicMaxObj.addProperty("Eventi", statsGeneri.get(0).getGeneri()[0]);
-=======
 										JsonMusicMaxObj.addProperty("Nome", statsGeneriMax.get(0).getStateCode());
 										JsonMusicMaxObj.addProperty("Eventi", statsGeneriMax.get(0).getMusic());
->>>>>>> branch 'master' of https://github.com/S1093425/ProgettoOOP.git
 									JsonArray JsonMusicMin =new JsonArray();
 									JsonMusicObj.add("Stato con meno eventi Musica", JsonMusicMin);
 										JsonObject JsonMusicMinObj= new JsonObject();
 										JsonMusicMin.add(JsonMusicMinObj);
-<<<<<<< HEAD
-										JsonMusicMinObj.addProperty("Nome", statsGeneri.get(1).getStateCode());
-										JsonMusicMinObj.addProperty("Eventi", statsGeneri.get(1).getGeneri()[0]);
-=======
 										JsonMusicMinObj.addProperty("Nome", statsGeneriMin.get(0).getStateCode());
 										JsonMusicMinObj.addProperty("Eventi", statsGeneriMin.get(0).getMusic());
->>>>>>> branch 'master' of https://github.com/S1093425/ProgettoOOP.git
 							JsonArray JsonSport = new JsonArray();
 							JsonGenereObject.add("Sport", JsonSport);
 								JsonObject JsonSportObj= new JsonObject();
@@ -378,24 +323,14 @@ public class Controller {
 									JsonSportObj.add("Stato con più eventi Sport", JsonSportMax);
 										JsonObject JsonSportMaxObj= new JsonObject();
 										JsonSportMax.add(JsonSportMaxObj);
-<<<<<<< HEAD
-										JsonSportMaxObj.addProperty("Nome", statsGeneri.get(2).getStateCode());
-										JsonSportMaxObj.addProperty("Eventi", statsGeneri.get(2).getGeneri()[1]);
-=======
 										JsonSportMaxObj.addProperty("Nome", statsGeneriMax.get(1).getStateCode());
 										JsonSportMaxObj.addProperty("Eventi", statsGeneriMax.get(1).getSport());
->>>>>>> branch 'master' of https://github.com/S1093425/ProgettoOOP.git
 									JsonArray JsonSportMin =new JsonArray();
 									JsonSportObj.add("Stato con meno eventi Sport", JsonSportMin);
 										JsonObject JsonSportMinObj= new JsonObject();
 										JsonSportMin.add(JsonSportMinObj);
-<<<<<<< HEAD
-										JsonSportMinObj.addProperty("Nome", statsGeneri.get(3).getStateCode());
-										JsonSportMinObj.addProperty("Eventi", statsGeneri.get(3).getGeneri()[1]);
-=======
 										JsonSportMinObj.addProperty("Nome", statsGeneriMin.get(1).getStateCode());
 										JsonSportMinObj.addProperty("Eventi", statsGeneriMin.get(1).getSport());
->>>>>>> branch 'master' of https://github.com/S1093425/ProgettoOOP.git
 							JsonArray JsonArt = new JsonArray();
 							JsonGenereObject.add("Arte e Teatro", JsonArt);
 								JsonObject JsonArtObj= new JsonObject();
@@ -404,24 +339,14 @@ public class Controller {
 									JsonArtObj.add("Stato con più eventi Arte e Teatro", JsonArtMax);
 										JsonObject JsonArtMaxObj= new JsonObject();
 										JsonArtMax.add(JsonArtMaxObj);
-<<<<<<< HEAD
-										JsonArtMaxObj.addProperty("Nome", statsGeneri.get(4).getStateCode());
-										JsonArtMaxObj.addProperty("Eventi", statsGeneri.get(4).getGeneri()[2]);
-=======
 										JsonArtMaxObj.addProperty("Nome", statsGeneriMax.get(2).getStateCode());
 										JsonArtMaxObj.addProperty("Eventi", statsGeneriMax.get(2).getArt());
->>>>>>> branch 'master' of https://github.com/S1093425/ProgettoOOP.git
 									JsonArray JsonArtMin =new JsonArray();
 									JsonArtObj.add("Stato con meno eventi Arte e Teatro", JsonArtMin);
 										JsonObject JsonArtMinObj= new JsonObject();
 										JsonArtMin.add(JsonArtMinObj);
-<<<<<<< HEAD
-										JsonArtMinObj.addProperty("Nome", statsGeneri.get(5).getStateCode());
-										JsonArtMinObj.addProperty("Eventi", statsGeneri.get(5).getGeneri()[2]);
-=======
 										JsonArtMinObj.addProperty("Nome", statsGeneriMin.get(2).getStateCode());
 										JsonArtMinObj.addProperty("Eventi", statsGeneriMin.get(2).getArt());
->>>>>>> branch 'master' of https://github.com/S1093425/ProgettoOOP.git
 							JsonArray JsonMix = new JsonArray();
 							JsonGenereObject.add("Misto", JsonMix);
 								JsonObject JsonMixObj= new JsonObject();
@@ -430,24 +355,14 @@ public class Controller {
 									JsonMixObj.add("Stato con più eventi Misti", JsonMixMax);
 										JsonObject JsonMixMaxObj= new JsonObject();
 										JsonMixMax.add(JsonMixMaxObj);
-<<<<<<< HEAD
-										JsonMixMaxObj.addProperty("Nome", statsGeneri.get(6).getStateCode());
-										JsonMixMaxObj.addProperty("Eventi", statsGeneri.get(6).getGeneri()[3]);
-=======
 										JsonMixMaxObj.addProperty("Nome", statsGeneriMax.get(3).getStateCode());
 										JsonMixMaxObj.addProperty("Eventi", statsGeneriMax.get(3).getMix());
->>>>>>> branch 'master' of https://github.com/S1093425/ProgettoOOP.git
 									JsonArray JsonMixMin =new JsonArray();
 									JsonMixObj.add("Stato con meno eventi Misti", JsonMixMin);
 										JsonObject JsonMixMinObj= new JsonObject();
 										JsonMixMin.add(JsonMixMinObj);
-<<<<<<< HEAD
-										JsonMixMinObj.addProperty("Nome", statsGeneri.get(7).getStateCode());
-										JsonMixMinObj.addProperty("Eventi", statsGeneri.get(7).getGeneri()[3]);
-=======
 										JsonMixMinObj.addProperty("Nome", statsGeneriMin.get(3).getStateCode());
 										JsonMixMinObj.addProperty("Eventi", statsGeneriMin.get(3).getMix());
->>>>>>> branch 'master' of https://github.com/S1093425/ProgettoOOP.git
 			
 		
 		}catch (JsonSyntaxException e) {
