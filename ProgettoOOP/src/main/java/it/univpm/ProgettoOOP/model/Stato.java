@@ -4,8 +4,15 @@ public class Stato {
 		
 		private String StateCode;
 		private int Eventi_Totali;
-		private int[] Generi = new int[4];
-		private int[] Source = new int[5];
+		private int Ticketmaster;
+		private int Universe;
+		private int Tmr;
+		private int Frontgate;
+		private int Ticketweb;
+		private int Music;
+		private int Sport;
+		private int Art;
+		private int Mix;
 		public Stato() {
 			
 		}
@@ -21,19 +28,60 @@ public class Stato {
 		public void setEventi_Totali(int eventi_Totali) {
 			Eventi_Totali = eventi_Totali;
 		}
-		public int[] getGeneri() {
-			return Generi;
+		public int getTicketmaster() {
+			return Ticketmaster;
 		}
-		public void setGeneri(int[] generi) {
-			Generi = generi;
+		public void setTicketmaster(int ticketmaster) {
+			Ticketmaster = ticketmaster;
 		}
-		public int[] getSource() {
-			return Source;
+		public int getUniverse() {
+			return Universe;
 		}
-		public void setSource(int[] source) {
-			Source = source;
+		public void setUniverse(int universe) {
+			Universe = universe;
 		}
-		
+		public int getTmr() {
+			return Tmr;
+		}
+		public void setTmr(int tmr) {
+			Tmr = tmr;
+		}
+		public int getFrontgate() {
+			return Frontgate;
+		}
+		public void setFrontgate(int frontgate) {
+			Frontgate = frontgate;
+		}
+		public int getTicketweb() {
+			return Ticketweb;
+		}
+		public void setTicketweb(int ticketweb) {
+			Ticketweb = ticketweb;
+		}
+		public int getMusic() {
+			return Music;
+		}
+		public void setMusic(int music) {
+			Music = music;
+		}
+		public int getSport() {
+			return Sport;
+		}
+		public void setSport(int sport) {
+			Sport = sport;
+		}
+		public int getArt() {
+			return Art;
+		}
+		public void setArt(int art) {
+			Art = art;
+		}
+		public int getMix() {
+			return Mix;
+		}
+		public void setMix(int mix) {
+			Mix = mix;
+		}
 		
 		
 		
