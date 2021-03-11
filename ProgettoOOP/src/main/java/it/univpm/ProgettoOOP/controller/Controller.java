@@ -384,12 +384,7 @@ public class Controller {
 		}
 		return JsonFinale;
 	}
-	/**
-	 * 
-	 * @param body
-	 * @param link
-	 * @return
-	 */
+	
 	private String getLink(JsonObject body,String link) {
 		String[] filtri = {"stati","genere","dataIn","dataFin","source"};
 		body = body.get("filtri").getAsJsonObject();
