@@ -28,7 +28,11 @@ import it.univpm.ProgettoOOP.services.CercaEvento;
  */
 import it.univpm.ProgettoOOP.services.JsonToClass;
 import it.univpm.ProgettoOOP.statistiche.Statistiche;
-
+/**
+ * 
+ * @author Alessandro Rongoni, Gregorio Vecchiola
+ *
+ */
 @RestController
 public class Controller {
 
@@ -66,7 +70,9 @@ public class Controller {
 		 }
 		 return eve;
 	}
-	
+	/**
+	 * 
+	 */
 	@PostMapping("/Stats")
 	public JsonObject getStats(@RequestBody JsonObject body ){
 		Statistiche statistiche=new Statistiche();
@@ -378,6 +384,12 @@ public class Controller {
 		}
 		return JsonFinale;
 	}
+	/**
+	 * 
+	 * @param body
+	 * @param link
+	 * @return
+	 */
 	private String getLink(JsonObject body,String link) {
 		String[] filtri = {"stati","genere","dataIn","dataFin","source"};
 		body = body.get("filtri").getAsJsonObject();
