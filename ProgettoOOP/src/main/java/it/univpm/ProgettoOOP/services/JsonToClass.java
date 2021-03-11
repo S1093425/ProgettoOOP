@@ -12,13 +12,13 @@ public class JsonToClass {
 		public int getPage(String evento_stato) {
 			 JsonObject Obj = (JsonObject)JsonParser.parseString(evento_stato);
 			 JsonObject page = Obj.get("page").getAsJsonObject();
-			 int pagine=(page.get("totalPages").getAsInt())-1;
+			 int pagine=page.get("totalPages").getAsInt();
 			return pagine;
 		}
 		public int getTotalElements(String evento_stato) {
 			 JsonObject Obj = (JsonObject)JsonParser.parseString(evento_stato);
 			 JsonObject page = Obj.get("page").getAsJsonObject();
-			 int tot= (page.get("totalElements").getAsInt())-1;
+			 int tot= page.get("totalElements").getAsInt();
 			return tot;
 		}
 		public String getNomeStato(String evento_stato) {
@@ -38,7 +38,9 @@ public class JsonToClass {
 			JsonObject Obj = (JsonObject)JsonParser.parseString(evento_stato);
 			 JsonObject embedded = Obj.get("_embedded").getAsJsonObject();
 			JsonArray arrEventi = embedded.get("events").getAsJsonArray();
+			System.out.println(i);
 			 JsonObject objEvent = arrEventi.get(i).getAsJsonObject();
+			 System.out.println(i);
 			 	e.setName(objEvent.get("name").getAsString());
 			 JsonObject dates = objEvent.get("dates").getAsJsonObject();
 			 JsonObject start = dates.get("start").getAsJsonObject();

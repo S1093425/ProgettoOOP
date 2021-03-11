@@ -43,15 +43,19 @@ public class Controller {
 		 Evento e = new Evento();
 		 String urlpagine="https://app.ticketmaster.com/discovery/v2/events.json?stateCode="+stateCode+"&countryCode=US&apikey=02znw2Zzu1vGIRauqzXnI595CY7TlXX1&page=0&size=199";
 		 String evento_statopagine=CercaEvento.getEvento(urlpagine);		 
-		 int x = jtc.getTotalElements(evento_statopagine);
+		 int x = jtc.getPage(evento_statopagine)-1;
 		 int y= jtc.getTotalElements(evento_statopagine);
 		 if(x>5) x=5;
 		 for(int j=0;j<=x;j++) {
 		 	String url="https://app.ticketmaster.com/discovery/v2/events.json?stateCode="+stateCode+"&countryCode=US&apikey=02znw2Zzu1vGIRauqzXnI595CY7TlXX1&page="+j+"&size=199";
 		 	String evento_stato=CercaEvento.getEvento(url);
 		 	System.out.println(evento_stato);
-		 	if(j==x){
-		 		y-= j*199;
+		 	if((j==x)&&(x!=5)){
+		 		System.out.println("------");
+		 		System.out.println(y);
+		 		y-= (j*199);
+		 		System.out.println(y);
+		 		System.out.println("------");
 		 		for(int i=0; i<y;i++) {
 				 	e=jtc.getEventoFromJson(evento_stato,i);
 				 	eve.add(e);
@@ -86,7 +90,7 @@ public class Controller {
 			JsonArray array_generi = jo.get("generi").getAsJsonArray();	
 			for (int i = 0; i < array_sigle.size(); i++) {
 				 Stato s= new Stato();
-				 String ursigle="https://app.ticketmaster.com/discovery/v2/events.json?stateCode="+array_sigle.get(i).getAsString()+"&countryCode=US&apikey=02znw2Zzu1vGIRauqzXnI595CY7TlXX1&page=0&size=199";
+				 String ursigle="https://app.ticketmaster.com/discovery/v2/events.json?stateCode="+array_sigle.get(i).getAsString()+"&countryCode=US&apikey=02znw2Zzu1vGIRauqzXnI595CY7TlXX1&page=0&size=1";
 				 String statsigle=CercaEvento.getEvento(ursigle);
 				 s.setStateCode(jtc.getNomeStato(statsigle));
 				 s.setEventi_Totali(jtc.getTotalElements(statsigle));			 
@@ -105,7 +109,7 @@ public class Controller {
 				}
 				s.setMusic(array1[0]); s.setSport(array1[1]); s.setArt(array1[2]); s.setMix(array1[3]);
 				stati.add(s);
-				JsonObject JsonStato = new JsonObject();
+				JsonObject JsonStato = jtc.getJsonFromStats(s);
 				JsonStatistiche.add(JsonStato);				
 			}
 			
@@ -136,7 +140,7 @@ public class Controller {
 					 statsSourceMax=statistiche.getMaxSource(statsSourceMax,stati.get(i));	
 					 statsSourceMin=statistiche.getMinSource(statsSourceMin,stati.get(i));
 					 statsGeneriMax=statistiche.getMaxGenere(statsGeneriMax, stati.get(i));
-					 statsGeneriMin=statistiche.getMaxGenere(statsGeneriMin, stati.get(i));
+					 statsGeneriMin=statistiche.getMinGenere(statsGeneriMin, stati.get(i));
 				 }
 			}
 			System.out.println("Stats");
