@@ -9,10 +9,13 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 
+import java.awt.font.LineBreakMeasurer;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+
+import it.univpm.ProgettoOOP.filter.*;
 
 import it.univpm.ProgettoOOP.log.Log;
 import it.univpm.ProgettoOOP.model.*;
@@ -36,7 +39,7 @@ public class Controller {
 		 String stateCode= body.get("stato").getAsString();
 		 ArrayList<Evento> eve = new ArrayList<Evento>();  
 		 Evento e = new Evento();
-		 String urlpagine="https://app.ticketmaster.com/discovery/v2/events.json?stateCode="+stateCode+"&countryCode=US&apikey=02znw2Zzu1vGIRauqzXnI595CY7TlXX1&page=0&size=199";
+		 String urlpagine="https://app.ticketmaster.com/discovery/v2/events.json?stateCode="+stateCode+"&countryCode=US&apikey=02znw2Zzu1vGIRauqzXnI595CY7TlXX1&page=0&size=1";
 		 String evento_statopagine=CercaEvento.getEvento(urlpagine);
 		 JsonObject Obj = (JsonObject)JsonParser.parseString(evento_statopagine);
 		 JsonObject page = Obj.get("page").getAsJsonObject();		 
@@ -65,7 +68,7 @@ public class Controller {
 	}
 	
 	@PostMapping("/Stats")
-	public JsonObject getStats(){
+	public JsonObject getStats(@RequestBody JsonObject body ){
 		Statistiche statistiche=new Statistiche();
 		ArrayList<Stato> stati = new ArrayList<Stato>();
 		JsonObject JsonFinale= new JsonObject();
@@ -81,7 +84,7 @@ public class Controller {
 			JsonArray array_generi = jo.get("generi").getAsJsonArray();	
 			for (int i = 0; i < array_sigle.size(); i++) {
 				Stato s= new Stato();
-				String ursigle="https://app.ticketmaster.com/discovery/v2/events.json?stateCode="+array_sigle.get(i).getAsString()+"&countryCode=US&apikey=02znw2Zzu1vGIRauqzXnI595CY7TlXX1&page=0&size=199";
+				String ursigle="https://app.ticketmaster.com/discovery/v2/events.json?stateCode="+array_sigle.get(i).getAsString()+"&countryCode=US&apikey=02znw2Zzu1vGIRauqzXnI595CY7TlXX1&page=0&size=1";
 				 String statsigle=CercaEvento.getEvento(ursigle);
 				 JsonObject Objsigle = (JsonObject)JsonParser.parseString(statsigle);
 				 JsonObject embedded = Objsigle.get("_embedded").getAsJsonObject();
@@ -96,7 +99,7 @@ public class Controller {
 				 s.setEventi_Totali(pagesigle.get("totalElements").getAsInt());			 
 				 int[] array = new int[5];
 				for(int j=0;j<array_source.size();j++) {
-					String urlsource="https://app.ticketmaster.com/discovery/v2/events.json?stateCode="+array_sigle.get(i).getAsString()+"&countryCode=US&source="+array_source.get(j).getAsString()+"&apikey=02znw2Zzu1vGIRauqzXnI595CY7TlXX1&size=199";
+					String urlsource="https://app.ticketmaster.com/discovery/v2/events.json?stateCode="+array_sigle.get(i).getAsString()+"&countryCode=US&source="+array_source.get(j).getAsString()+"&apikey=02znw2Zzu1vGIRauqzXnI595CY7TlXX1&size=1";
 					 String statsource=CercaEvento.getEvento(urlsource);
 					 JsonObject Objsource = (JsonObject)JsonParser.parseString(statsource);
 					 JsonObject pagesource = Objsource.get("page").getAsJsonObject();
@@ -170,7 +173,7 @@ public class Controller {
 					 statsSourceMax=statistiche.getMaxSource(statsSourceMax,stati.get(i));	
 					 statsSourceMin=statistiche.getMinSource(statsSourceMin,stati.get(i));
 					 statsGeneriMax=statistiche.getMaxGenere(statsGeneriMax, stati.get(i));
-					 statsGeneriMin=statistiche.getMaxGenere(statsGeneriMin, stati.get(i));
+					 statsGeneriMin=statistiche.getMinGenere(statsGeneriMin, stati.get(i));
 				 }
 			}
 			System.out.println("Stats");
@@ -186,8 +189,8 @@ public class Controller {
 			System.out.println(statsSourceMax.get(3).getFrontgate());
 			System.out.println(statsSourceMin.get(3).getFrontgate());
 			System.out.println(statsSourceMax.get(4).getTicketweb());
-			System.out.println("-----------------");
 			System.out.println(statsSourceMin.get(4).getTicketweb());
+			System.out.println("-----------------");
 			System.out.println(statsGeneriMax.get(0).getMusic());
 			System.out.println(statsGeneriMin.get(0).getMusic());
 			System.out.println(statsGeneriMax.get(1).getSport());
@@ -196,6 +199,7 @@ public class Controller {
 			System.out.println(statsGeneriMin.get(2).getArt());
 			System.out.println(statsGeneriMax.get(3).getMix());
 			System.out.println(statsGeneriMin.get(3).getMix());
+			System.out.println("-----------------");
 			
 				JsonObject JsonStatGlob = new JsonObject();
 				JsonStatisticheGlobali.add(JsonStatGlob);
@@ -288,7 +292,9 @@ public class Controller {
 										JsonObject JsonWebMaxObj= new JsonObject();
 										JsonWebMax.add(JsonTickMaxObj);
 										JsonWebMaxObj.addProperty("Nome", statsSourceMax.get(4).getStateCode());
+										System.out.println(statsSourceMax.get(4).getTicketweb());
 										JsonWebMaxObj.addProperty("Eventi", statsSourceMax.get(4).getTicketweb());
+										System.out.println(statsSourceMax.get(4).getTicketweb());
 									JsonArray JsonWebMin =new JsonArray();
 									JsonWebObj.add("Stato con meno eventi Ticketweb", JsonWebMin);
 										JsonObject JsonWebMinObj= new JsonObject();
@@ -372,5 +378,34 @@ public class Controller {
 		}
 		return JsonFinale;
 	}
-	
+	private String getLink(JsonObject body,String link) {
+		String[] filtri = {"stati","genere","dataIn","dataFin","source"};
+		body = body.get("filtri").getAsJsonObject();
+		ArrayList<Filtra> array_filtri = new ArrayList<Filtra>();
+		for(String a : filtri) {
+			try {
+				JsonObject tmp = body.get(a).getAsJsonObject();
+				if(tmp.get("attivo").getAsBoolean()) {
+					switch(a){
+						case "stati": array_filtri.add(new State(tmp.get("param").getAsString()));
+							break;
+						case "genere": array_filtri.add(new Genere(tmp.get("param").getAsString()));
+							break;
+						case "dataIn": array_filtri.add(new DataInizio(tmp.get("param").getAsString()));
+							break;
+						case "dataFin": array_filtri.add(new DataFine(tmp.get("param").getAsString()));
+							break;
+						case "source": array_filtri.add(new Source(tmp.get("param").getAsString()));
+							break;
+					}
+				}
+			}catch(Exception e) {
+				
+			}
+		}
+		for (int i = 0; i < array_filtri.size(); i++) {
+			link += array_filtri.get(i).filtra(link);
+		}
+		return link;
+	}	
 }

@@ -10,3 +10,35 @@ Errore avvenuto in data :Thu Mar 04 20:38:32 CET 2021
 Errore avvenuto in data :Tue Mar 09 20:24:03 CET 2021
      Causa: ERRORE DURANTE LA RICHIESTA EVENTO
      Dettagli: Server returned HTTP response code: 429 for URL: https://app.ticketmaster.com/discovery/v2/events.json?stateCode=AL&countryCode=US&source=ticketweb&apikey=02znw2Zzu1vGIRauqzXnI595CY7TlXX1&size=199
+
+Errore avvenuto in data :Wed Mar 10 13:49:58 CET 2021
+     Causa: ERRORE DURANTE LA RICHIESTA EVENTO
+     Dettagli: Server returned HTTP response code: 429 for URL: https://app.ticketmaster.com/discovery/v2/events.json?stateCode=AL&countryCode=US&source=frontgate&apikey=02znw2Zzu1vGIRauqzXnI595CY7TlXX1&size=199
+
+Errore avvenuto in data :Thu Mar 11 17:36:58 CET 2021
+     Causa: GENERE NON DEFINITO
+     Dettagli: Cannot invoke "com.google.gson.JsonElement.getAsJsonArray()" because the return value of "com.google.gson.JsonObject.get(String)" is null
+
+Errore avvenuto in data :Thu Mar 11 17:37:00 CET 2021
+     Causa: GENERE NON DEFINITO
+     Dettagli: Cannot invoke "com.google.gson.JsonElement.getAsJsonArray()" because the return value of "com.google.gson.JsonObject.get(String)" is null
+
+Errore avvenuto in data :Thu Mar 11 17:39:35 CET 2021
+     Causa: GENERE NON DEFINITO
+     Dettagli: Cannot invoke "com.google.gson.JsonElement.getAsJsonArray()" because the return value of "com.google.gson.JsonObject.get(String)" is null
+
+Errore avvenuto in data :Thu Mar 11 17:39:36 CET 2021
+     Causa: GENERE NON DEFINITO
+     Dettagli: Cannot invoke "com.google.gson.JsonElement.getAsJsonArray()" because the return value of "com.google.gson.JsonObject.get(String)" is null
+
+Errore avvenuto in data :Thu Mar 11 18:58:05 CET 2021
+     Causa: GENERE NON DEFINITO
+     Dettagli: Cannot invoke "com.google.gson.JsonElement.getAsJsonArray()" because the return value of "com.google.gson.JsonObject.get(String)" is null
+
+Errore avvenuto in data :Thu Mar 11 18:58:06 CET 2021
+     Causa: GENERE NON DEFINITO
+     Dettagli: Cannot invoke "com.google.gson.JsonElement.getAsJsonArray()" because the return value of "com.google.gson.JsonObject.get(String)" is null
+
+Errore avvenuto in data :Thu Mar 11 19:18:08 CET 2021
+     Causa: ERRORE DURANTE LA RICHIESTA EVENTO
+     Dettagli: Illegal character in URL
