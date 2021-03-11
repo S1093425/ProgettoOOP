@@ -9,14 +9,12 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 
-import java.awt.font.LineBreakMeasurer;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
 import it.univpm.ProgettoOOP.filter.*;
-
 import it.univpm.ProgettoOOP.log.Log;
 import it.univpm.ProgettoOOP.model.*;
 import it.univpm.ProgettoOOP.services.CercaEvento;
@@ -39,12 +37,10 @@ public class Controller {
 		 String stateCode= body.get("stato").getAsString();
 		 ArrayList<Evento> eve = new ArrayList<Evento>();  
 		 Evento e = new Evento();
-		 String urlpagine="https://app.ticketmaster.com/discovery/v2/events.json?stateCode="+stateCode+"&countryCode=US&apikey=02znw2Zzu1vGIRauqzXnI595CY7TlXX1&page=0&size=1";
-		 String evento_statopagine=CercaEvento.getEvento(urlpagine);
-		 JsonObject Obj = (JsonObject)JsonParser.parseString(evento_statopagine);
-		 JsonObject page = Obj.get("page").getAsJsonObject();		 
-		 int x = (page.get("totalPages").getAsInt())-1;
-		 int y= (page.get("totalElements").getAsInt())-1;
+		 String urlpagine="https://app.ticketmaster.com/discovery/v2/events.json?stateCode="+stateCode+"&countryCode=US&apikey=02znw2Zzu1vGIRauqzXnI595CY7TlXX1&page=0&size=199";
+		 String evento_statopagine=CercaEvento.getEvento(urlpagine);		 
+		 int x = jtc.getTotalElements(evento_statopagine);
+		 int y= jtc.getTotalElements(evento_statopagine);
 		 if(x>5) x=5;
 		 for(int j=0;j<=x;j++) {
 		 	String url="https://app.ticketmaster.com/discovery/v2/events.json?stateCode="+stateCode+"&countryCode=US&apikey=02znw2Zzu1vGIRauqzXnI595CY7TlXX1&page="+j+"&size=199";
@@ -53,99 +49,60 @@ public class Controller {
 		 	if(j==x){
 		 		y-= j*199;
 		 		for(int i=0; i<y;i++) {
-				 	e=jtc.getClassFromJson(evento_stato,i);
+				 	e=jtc.getEventoFromJson(evento_stato,i);
 				 	eve.add(e);
 				 }
 		 	}else {
 		 		for(int i=0; i<199;i++) {
-		 			e=jtc.getClassFromJson(evento_stato,i);
+		 			e=jtc.getEventoFromJson(evento_stato,i);
 		 			eve.add(e);
 		 		}
-		 	}
-		 	
+		 	}	 	
 		 }
 		 return eve;
 	}
 	
 	@PostMapping("/Stats")
-	public JsonObject getStats(@RequestBody JsonObject body ){
+	public JsonObject getStats(){
 		Statistiche statistiche=new Statistiche();
 		ArrayList<Stato> stati = new ArrayList<Stato>();
-		JsonObject JsonFinale= new JsonObject();
-		JsonArray JsonStatistiche= new JsonArray();
-		JsonFinale.add("Statistiche", JsonStatistiche);
+		JsonObject JsonFinale= new JsonObject();		
 		JsonArray JsonStatisticheGlobali= new JsonArray();
 		JsonFinale.add("Statistiche Globali", JsonStatisticheGlobali);
 		try {
+			JsonArray JsonStatistiche= new JsonArray();
+			JsonFinale.add("Statistiche", JsonStatistiche);
 			BufferedReader buffer = new BufferedReader(new FileReader(new File("sigle.json")));
-			JsonObject jo = JsonParser.parseReader(buffer).getAsJsonObject(); 
+			JsonObject jo = JsonParser.parseReader(buffer).getAsJsonObject();
+			buffer.close();
 			JsonArray array_sigle = jo.get("sigle").getAsJsonArray();
 			JsonArray array_source = jo.get("source").getAsJsonArray();
 			JsonArray array_generi = jo.get("generi").getAsJsonArray();	
 			for (int i = 0; i < array_sigle.size(); i++) {
-				Stato s= new Stato();
-				String ursigle="https://app.ticketmaster.com/discovery/v2/events.json?stateCode="+array_sigle.get(i).getAsString()+"&countryCode=US&apikey=02znw2Zzu1vGIRauqzXnI595CY7TlXX1&page=0&size=1";
+				 Stato s= new Stato();
+				 String ursigle="https://app.ticketmaster.com/discovery/v2/events.json?stateCode="+array_sigle.get(i).getAsString()+"&countryCode=US&apikey=02znw2Zzu1vGIRauqzXnI595CY7TlXX1&page=0&size=199";
 				 String statsigle=CercaEvento.getEvento(ursigle);
-				 JsonObject Objsigle = (JsonObject)JsonParser.parseString(statsigle);
-				 JsonObject embedded = Objsigle.get("_embedded").getAsJsonObject();
-				 JsonArray arrEventi = embedded.get("events").getAsJsonArray();
-				 JsonObject objEvent = arrEventi.get(0).getAsJsonObject();
-				 JsonObject ambedded2 = objEvent.get("_embedded").getAsJsonObject();
-				 JsonArray venues = ambedded2.get("venues").getAsJsonArray();
-				 JsonObject stato = venues.get(0).getAsJsonObject();
-				 JsonObject statecode = stato.get("state").getAsJsonObject();
-				 s.setStateCode(statecode.get("name").getAsString()); 
-				 JsonObject pagesigle = Objsigle.get("page").getAsJsonObject();
-				 s.setEventi_Totali(pagesigle.get("totalElements").getAsInt());			 
+				 s.setStateCode(jtc.getNomeStato(statsigle));
+				 s.setEventi_Totali(jtc.getTotalElements(statsigle));			 
 				 int[] array = new int[5];
 				for(int j=0;j<array_source.size();j++) {
 					String urlsource="https://app.ticketmaster.com/discovery/v2/events.json?stateCode="+array_sigle.get(i).getAsString()+"&countryCode=US&source="+array_source.get(j).getAsString()+"&apikey=02znw2Zzu1vGIRauqzXnI595CY7TlXX1&size=1";
-					 String statsource=CercaEvento.getEvento(urlsource);
-					 JsonObject Objsource = (JsonObject)JsonParser.parseString(statsource);
-					 JsonObject pagesource = Objsource.get("page").getAsJsonObject();
-					 array[j]= pagesource.get("totalElements").getAsInt();
+					 String statsource=CercaEvento.getEvento(urlsource);				 
+					 array[j]= jtc.getTotalElements(statsource);
 				}
-				s.setTicketmaster(array[0]);
-				s.setUniverse(array[1]);
-				s.setTmr(array[2]);
-				s.setFrontgate(array[3]);
-				s.setTicketweb(array[4]);
+				s.setTicketmaster(array[0]); s.setUniverse(array[1]); s.setTmr(array[2]); s.setFrontgate(array[3]); s.setTicketweb(array[4]);
 				int[] array1 = new int[4];
 				for(int j=0;j<array_generi.size();j++) {
-					String urlgenere="https://app.ticketmaster.com/discovery/v2/events.json?stateCode="+array_sigle.get(i).getAsString()+"&countryCode=US&apikey=02znw2Zzu1vGIRauqzXnI595CY7TlXX1&size=199&classificationName="+array_generi.get(j).getAsString();
+					 String urlgenere="https://app.ticketmaster.com/discovery/v2/events.json?stateCode="+array_sigle.get(i).getAsString()+"&countryCode=US&apikey=02znw2Zzu1vGIRauqzXnI595CY7TlXX1&size=1&classificationName="+array_generi.get(j).getAsString();
 					 String statgenere=CercaEvento.getEvento(urlgenere);
-					 JsonObject Objgenere = (JsonObject)JsonParser.parseString(statgenere);
-					 JsonObject pagegenere = Objgenere.get("page").getAsJsonObject();
-					 array1[j]= pagegenere.get("totalElements").getAsInt();
+					 array1[j]= jtc.getTotalElements(statgenere);
 				}
-				s.setMusic(array1[0]);
-				s.setSport(array1[1]);
-				s.setArt(array1[2]);
-				s.setMix(array1[3]);
+				s.setMusic(array1[0]); s.setSport(array1[1]); s.setArt(array1[2]); s.setMix(array1[3]);
 				stati.add(s);
 				JsonObject JsonStato = new JsonObject();
-				JsonStatistiche.add(JsonStato);
-				JsonStato.addProperty("Stato", s.getStateCode());
-				JsonStato.addProperty("Eventi Totali", s.getEventi_Totali());
-				JsonArray JsonAGeneri= new JsonArray();
-				JsonStato.add("Generi", JsonAGeneri);
-				JsonObject JsonGeneri = new JsonObject();
-				JsonAGeneri.add(JsonGeneri);
-				JsonGeneri.addProperty("Musica", s.getMusic());
-				JsonGeneri.addProperty("Sport", s.getSport());
-				JsonGeneri.addProperty("Arte e Teatro", s.getArt());
-				JsonGeneri.addProperty("Misto", s.getMix());
-				JsonArray JsonASource= new JsonArray();
-				JsonStato.add("Source", JsonASource);
-				JsonObject JsonSource = new JsonObject();
-				JsonASource.add(JsonSource);
-				JsonSource.addProperty("Ticketmaster", s.getTicketmaster());
-				JsonSource.addProperty("Universe", s.getUniverse());
-				JsonSource.addProperty("Ticketmaster Resale", s.getTmr());
-				JsonSource.addProperty("FrontGate Tickets", s.getFrontgate());
-				JsonSource.addProperty("Ticketweb", s.getTicketweb());
+				JsonStatistiche.add(JsonStato);				
 			}
-			buffer.close();
+			
 			
 			
 			ArrayList<Stato> statsTot = new ArrayList<Stato>();
@@ -173,7 +130,7 @@ public class Controller {
 					 statsSourceMax=statistiche.getMaxSource(statsSourceMax,stati.get(i));	
 					 statsSourceMin=statistiche.getMinSource(statsSourceMin,stati.get(i));
 					 statsGeneriMax=statistiche.getMaxGenere(statsGeneriMax, stati.get(i));
-					 statsGeneriMin=statistiche.getMinGenere(statsGeneriMin, stati.get(i));
+					 statsGeneriMin=statistiche.getMaxGenere(statsGeneriMin, stati.get(i));
 				 }
 			}
 			System.out.println("Stats");
@@ -189,8 +146,8 @@ public class Controller {
 			System.out.println(statsSourceMax.get(3).getFrontgate());
 			System.out.println(statsSourceMin.get(3).getFrontgate());
 			System.out.println(statsSourceMax.get(4).getTicketweb());
-			System.out.println(statsSourceMin.get(4).getTicketweb());
 			System.out.println("-----------------");
+			System.out.println(statsSourceMin.get(4).getTicketweb());
 			System.out.println(statsGeneriMax.get(0).getMusic());
 			System.out.println(statsGeneriMin.get(0).getMusic());
 			System.out.println(statsGeneriMax.get(1).getSport());
@@ -199,7 +156,6 @@ public class Controller {
 			System.out.println(statsGeneriMin.get(2).getArt());
 			System.out.println(statsGeneriMax.get(3).getMix());
 			System.out.println(statsGeneriMin.get(3).getMix());
-			System.out.println("-----------------");
 			
 				JsonObject JsonStatGlob = new JsonObject();
 				JsonStatisticheGlobali.add(JsonStatGlob);
@@ -292,9 +248,7 @@ public class Controller {
 										JsonObject JsonWebMaxObj= new JsonObject();
 										JsonWebMax.add(JsonTickMaxObj);
 										JsonWebMaxObj.addProperty("Nome", statsSourceMax.get(4).getStateCode());
-										System.out.println(statsSourceMax.get(4).getTicketweb());
 										JsonWebMaxObj.addProperty("Eventi", statsSourceMax.get(4).getTicketweb());
-										System.out.println(statsSourceMax.get(4).getTicketweb());
 									JsonArray JsonWebMin =new JsonArray();
 									JsonWebObj.add("Stato con meno eventi Ticketweb", JsonWebMin);
 										JsonObject JsonWebMinObj= new JsonObject();
@@ -378,6 +332,7 @@ public class Controller {
 		}
 		return JsonFinale;
 	}
+	
 	private String getLink(JsonObject body,String link) {
 		String[] filtri = {"stati","genere","dataIn","dataFin","source"};
 		body = body.get("filtri").getAsJsonObject();
