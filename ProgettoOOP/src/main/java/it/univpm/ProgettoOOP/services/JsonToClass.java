@@ -38,7 +38,9 @@ public class JsonToClass {
 			JsonObject Obj = (JsonObject)JsonParser.parseString(evento_stato);
 			 JsonObject embedded = Obj.get("_embedded").getAsJsonObject();
 			JsonArray arrEventi = embedded.get("events").getAsJsonArray();
+			System.out.println(i);
 			 JsonObject objEvent = arrEventi.get(i).getAsJsonObject();
+			 System.out.println(i);
 			 	e.setName(objEvent.get("name").getAsString());
 			 JsonObject dates = objEvent.get("dates").getAsJsonObject();
 			 JsonObject start = dates.get("start").getAsJsonObject();

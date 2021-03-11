@@ -26,7 +26,11 @@ import it.univpm.ProgettoOOP.services.CercaEvento;
  */
 import it.univpm.ProgettoOOP.services.JsonToClass;
 import it.univpm.ProgettoOOP.statistiche.Statistiche;
-
+/**
+ * 
+ * @author Alessandro Rongoni, Gregorio Vecchiola
+ *
+ */
 @RestController
 public class Controller {
 
@@ -38,16 +42,20 @@ public class Controller {
 		 ArrayList<Evento> eve = new ArrayList<Evento>();  
 		 Evento e = new Evento();
 		 String urlpagine="https://app.ticketmaster.com/discovery/v2/events.json?stateCode="+stateCode+"&countryCode=US&apikey=02znw2Zzu1vGIRauqzXnI595CY7TlXX1&page=0&size=199";
-		 String evento_statopagine=CercaEvento.getEvento(urlpagine);		 
-		 int x = jtc.getTotalElements(evento_statopagine)-1;
-		 int y= jtc.getTotalElements(evento_statopagine)-1;
+		 String evento_statopagine=CercaEvento.getEvento(urlpagine);
+		 int x = jtc.getPage(evento_statopagine)-1;
+		 int y= jtc.getTotalElements(evento_statopagine);
 		 if(x>5) x=5;
 		 for(int j=0;j<=x;j++) {
 		 	String url="https://app.ticketmaster.com/discovery/v2/events.json?stateCode="+stateCode+"&countryCode=US&apikey=02znw2Zzu1vGIRauqzXnI595CY7TlXX1&page="+j+"&size=199";
 		 	String evento_stato=CercaEvento.getEvento(url);
 		 	System.out.println(evento_stato);
-		 	if(j==x){
-		 		y-= j*199;
+		 	if((j==x)&&(x!=5)){
+		 		System.out.println("------");
+		 		System.out.println(y);
+		 		y-= (j*199);
+		 		System.out.println(y);
+		 		System.out.println("------");
 		 		for(int i=0; i<y;i++) {
 				 	e=jtc.getEventoFromJson(evento_stato,i);
 				 	eve.add(e);
@@ -61,7 +69,9 @@ public class Controller {
 		 }
 		 return eve;
 	}
-	
+	/**
+	 * 
+	 */
 	@PostMapping("/Stats")
 	public JsonObject getStats(){
 		Statistiche statistiche=new Statistiche();
