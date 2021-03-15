@@ -1,16 +1,21 @@
 package it.univpm.ProgettoOOP.filter;
 
-public class Genere implements Filtra {
-	String param;
+import java.util.ArrayList;
 
-	public Genere(String param) {
-		super();
-		this.param = param;
-		
+import it.univpm.ProgettoOOP.model.Evento;
+
+public class Genere extends Filtra {
+	public Genere() {	
 	}
 	@Override
-	public String filtra(String link) {
-		String filter = "&classificationName=";
-		return link+filter+param;
+	public ArrayList<Evento> filtra(String genere, ArrayList<Evento> eve ) {
+		ArrayList<Evento> eventiFiltrati = new ArrayList<Evento>();
+		ArrayList<String> genereArray = new ArrayList<String>();
+		genereArray= getString(genere);
+		for(String s: genereArray) 
+			for(Evento e:eve)
+				if(e.getGenere()==s)
+					eventiFiltrati.add(e);
+		return eventiFiltrati;
 	}
 }

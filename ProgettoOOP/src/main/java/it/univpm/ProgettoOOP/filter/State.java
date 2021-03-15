@@ -1,16 +1,21 @@
 package it.univpm.ProgettoOOP.filter;
 
-public class State implements Filtra{
-	String param;
-	
-	public State(String param) {
-		super();
-		this.param = param;
-	
+import java.util.ArrayList;
+
+import it.univpm.ProgettoOOP.model.Evento;
+
+public class State extends Filtra {
+	public State() {	
 	}
 	@Override
-	public String filtra(String link) {
-		String filter = "&stateCode=";
-		return link+filter+param;
+	public ArrayList<Evento> filtra(String stati, ArrayList<Evento> eve ) {
+		ArrayList<Evento> eventiFiltrati = new ArrayList<Evento>();
+		ArrayList<String> statiArray = new ArrayList<String>();
+		statiArray= getString(stati);
+		for(String s: statiArray)
+			for(Evento e:eve)
+				if(e.getStato()==s)
+					eventiFiltrati.add(e);		
+		return eventiFiltrati;
 	}
 }

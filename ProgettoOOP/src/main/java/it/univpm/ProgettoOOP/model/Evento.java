@@ -1,9 +1,7 @@
 package it.univpm.ProgettoOOP.model;
 
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class Evento {
@@ -12,15 +10,15 @@ public class Evento {
 	private String Genere;
 	private Date DataInizio;
 	private String Stato;
-
+	private int[] SourceValue=new int[4];
 	public Evento() {
 	}
 	
-	public String getStateCode() {
+	public String getStato() {
 		return Stato;
 	}
 
-	public void setStateCode(String stato) {
+	public void setStato(String stato) {
 		Stato = stato;
 	}
 
@@ -49,5 +47,13 @@ public class Evento {
 		SimpleDateFormat strFormat1= new SimpleDateFormat("yyyy-MM-dd");
 		DataInizio= strFormat1.parse(dataInizio);
 		
+	}
+
+	public int[] getSourceValue() {
+		return SourceValue;
+	}
+
+	public void setSourceValue(int[] sourceValue) {
+		SourceValue = sourceValue;
 	}
 }

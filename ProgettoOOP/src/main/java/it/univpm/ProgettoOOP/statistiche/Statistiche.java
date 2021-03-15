@@ -2,13 +2,36 @@ package it.univpm.ProgettoOOP.statistiche;
 
 import java.util.ArrayList;
 
+import it.univpm.ProgettoOOP.model.Evento;
 import it.univpm.ProgettoOOP.model.Stato;
 
 public class Statistiche {
-	public Statistiche() {
-		
+	public Statistiche() {	
 	}
-	public ArrayList<Stato> getMinSource(ArrayList<Stato> min, Stato stato) {
+	public Stato getStatsStato(ArrayList<Evento> eventi,String stato) {
+		Stato stat= new Stato();
+		int[] generi= {0,0,0,0};
+		int[] source= {0,0,0,0};
+		for(Evento e: eventi)
+			if(e.getStato()==stato) {
+				stat.setEventi_Totali(stat.getEventi_Totali()+1);
+				switch(e.getGenere()) {
+					case "Music": generi[0]++; break;
+					case "Sport": generi[1]++; break;
+					case "Arts & Theatre": generi[2]++; break;
+					case "Miscellaneous": generi[3]++; break;
+				}
+				for(int i=0; i<4;i++)
+					if(e.getSourceValue()[i]!=0)
+						source[i]++;
+			}
+		stat.setGeneri(generi);
+		stat.setSource(source);
+		return stat;
+	}
+	
+	
+	/*public ArrayList<Stato> getMinSource(ArrayList<Stato> min, Stato stato) {
 		if (min.get(0).getTicketmaster()>stato.getTicketmaster()) 
 			min.set(0, stato);
 		if (min.get(1).getUniverse()>stato.getUniverse()) 
@@ -17,8 +40,6 @@ public class Statistiche {
 			min.set(2, stato);
 		if (min.get(3).getFrontgate()>stato.getFrontgate()) 
 			min.set(3, stato);
-		if (min.get(4).getTicketweb()>stato.getTicketweb()) 
-			min.set(4, stato);
 		return min;
 	}
 	public ArrayList<Stato> getMaxSource(ArrayList<Stato> max, Stato stato) {
@@ -30,8 +51,6 @@ public class Statistiche {
 			 max.set(2, stato);
 		if (max.get(3).getFrontgate()<stato.getFrontgate()) 
 			 max.set(3, stato);
-		if (max.get(4).getTicketweb()<stato.getTicketweb()) 
-			 max.set(4, stato);
 		return max;
 	}
 	public ArrayList<Stato> getMaxGenere(ArrayList<Stato> max, Stato stato) {
@@ -55,5 +74,5 @@ public class Statistiche {
 		if (min.get(3).getMix()>stato.getMix()) 
 			min.set(3, stato);
 		return min;
-	}
+	}*/
 }
