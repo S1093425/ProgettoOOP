@@ -5,7 +5,7 @@ import it.univpm.ProgettoOOP.log.Log;
 public class EventException extends Exception {
 	
 	public EventException() {
-			super();
+			super("Errore, consultare il file Log.txt");
 			Log.report("NON SONO DISPONIBILI EVENTI CON I FILTRI SPECIFICATI", getLocalizedMessage());
 		}
 
