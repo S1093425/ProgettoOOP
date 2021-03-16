@@ -10,8 +10,15 @@ public class Evento {
 	private String Genere;
 	private Date DataInizio;
 	private String Stato;
-	private int[] SourceValue=new int[4];
 	public Evento() {
+	}
+	
+	public Evento(String name, String genere, Date datainizio, String stato) {
+	this.Name=name;
+	this.Genere=genere;
+	this.DataInizio=datainizio;
+	this.Stato=stato;
+	
 	}
 	
 	public String getStato() {
@@ -47,13 +54,6 @@ public class Evento {
 		SimpleDateFormat strFormat1= new SimpleDateFormat("yyyy-MM-dd");
 		DataInizio= strFormat1.parse(dataInizio);
 		
-	}
+	}}
 
-	public int[] getSourceValue() {
-		return SourceValue;
-	}
 
-	public void setSourceValue(int[] sourceValue) {
-		SourceValue = sourceValue;
-	}
-}

@@ -35,10 +35,12 @@ import it.univpm.ProgettoOOP.statistiche.Statistiche;
 @RestController
 public class Controller {
 
-	JsonToClass jtc=new JsonToClass();
+	
+	
 	
 	@PostMapping("/Cerca")
-	 public ArrayList<Evento> getEvento(@RequestBody JsonObject body) throws StateNotFound {
+	 public static ArrayList<Evento> getEvento(@RequestBody JsonObject body) throws StateNotFound {
+		 JsonToClass jtc=new JsonToClass();
 		 String stateCode= body.get("stato").getAsString();
 		 ArrayList<Evento> eve = new ArrayList<Evento>();  
 		 Evento e = new Evento();
@@ -72,6 +74,7 @@ public class Controller {
 	 */
 	@PostMapping("/Stats")
 	public JsonObject getStats(@RequestBody JsonObject body){
+		JsonToClass jtc=new JsonToClass();
 		JsonObject JsonFinale= new JsonObject();
 		JsonArray JsonStatistiche= new JsonArray();
 		JsonFinale.add("Statistiche", JsonStatistiche);
