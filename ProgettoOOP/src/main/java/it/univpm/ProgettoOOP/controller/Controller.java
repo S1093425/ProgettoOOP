@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+import it.univpm.ProgettoOOP.exception.StateNotFound;
 import it.univpm.ProgettoOOP.filter.*;
 import it.univpm.ProgettoOOP.log.Log;
 import it.univpm.ProgettoOOP.model.*;
@@ -34,10 +35,12 @@ import it.univpm.ProgettoOOP.statistiche.Statistiche;
 @RestController
 public class Controller {
 
-	JsonToClass jtc=new JsonToClass();
+	
+	
 	
 	@PostMapping("/Cerca")
-	 public ArrayList<Evento> getEvento(@RequestBody JsonObject body) {
+	 public static ArrayList<Evento> getEvento(@RequestBody JsonObject body) throws StateNotFound {
+		 JsonToClass jtc=new JsonToClass();
 		 String stateCode= body.get("stato").getAsString();
 		 ArrayList<Evento> eve = new ArrayList<Evento>();  
 		 Evento e = new Evento();
@@ -62,13 +65,15 @@ public class Controller {
 		 		}
 		 	}	 	
 		 }
-		 return eve;
+		 if(eve.isEmpty()) throw new StateNotFound(stateCode);
+		 else return eve;
 	}
 	/**
 	 * 
 	 */
 	@PostMapping("/Stats")
 	public JsonObject getStats(@RequestBody JsonObject body){
+		JsonToClass jtc=new JsonToClass();
 		JsonObject JsonFinale= new JsonObject();
 		JsonArray JsonStatistiche= new JsonArray();
 		JsonFinale.add("Statistiche", JsonStatistiche);

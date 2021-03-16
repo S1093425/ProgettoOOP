@@ -89,8 +89,7 @@ public class JsonToClass {
 													sourceName.add("Ticketmaster Resale");
 											}catch(NullPointerException p) {
 												
-											}
-											
+											}										
 											e.setSourceName(sourceName);
 			return e;	
 		}

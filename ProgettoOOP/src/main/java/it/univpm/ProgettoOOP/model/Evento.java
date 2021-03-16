@@ -18,6 +18,14 @@ public class Evento {
 	public Evento() {
 	}
 	
+	public Evento(String name, String genere, Date datainizio, String stato) {
+	this.Name=name;
+	this.Genere=genere;
+	this.DataInizio=datainizio;
+	this.Stato=stato;
+	
+	}
+	
 	public String getStato() {
 		return Stato;
 	}
@@ -57,7 +65,7 @@ public class Evento {
 	public ArrayList<String> getSourceName() {
 		return SourceName;
 	}
-
+		
 	public void setSourceName(ArrayList<String> sourceName) {
 		SourceName = sourceName;
 	}
