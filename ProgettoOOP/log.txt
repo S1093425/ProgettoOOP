@@ -50,3 +50,7 @@ Errore avvenuto in data :Tue Mar 16 18:13:05 CET 2021
 Errore avvenuto in data :Tue Mar 16 18:15:11 CET 2021
      Causa: LO STATO IT NON E' STATO TROVATO
      Dettagli: Inserire uno stato dell'USA presente in lista o controllare la formattazione
+
+Errore avvenuto in data :Tue Mar 16 19:22:54 CET 2021
+     Causa: LO STATO IT NON E' STATO TROVATO
+     Dettagli: Inserire uno stato dell'USA presente in lista o controllare la formattazione
