@@ -24,20 +24,17 @@ import it.univpm.ProgettoOOP.filter.*;
 import it.univpm.ProgettoOOP.log.Log;
 import it.univpm.ProgettoOOP.model.*;
 import it.univpm.ProgettoOOP.services.CercaEvento;
+
+import it.univpm.ProgettoOOP.services.JsonToClass;
+import it.univpm.ProgettoOOP.services.ListaStati;
+import it.univpm.ProgettoOOP.statistiche.Statistiche;
 /*
  * <b>Classe</b> controller che gestisce tutte le chiamate al server
  * @author Vecchiola Gregorio
  * @author Rongoni Alessandro
  * @version 1.0as
  */
-import it.univpm.ProgettoOOP.services.JsonToClass;
-import it.univpm.ProgettoOOP.services.ListaStati;
-import it.univpm.ProgettoOOP.statistiche.Statistiche;
-/**
- * 
- * @author Alessandro Rongoni, Gregorio Vecchiola
- *
- */
+
 @RestController
 public class Controller {
 
