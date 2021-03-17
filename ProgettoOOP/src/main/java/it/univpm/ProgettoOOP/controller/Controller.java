@@ -13,12 +13,13 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 
+
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-
 import it.univpm.ProgettoOOP.exception.IllegalRequest;
 import it.univpm.ProgettoOOP.exception.StateNotFound;
 import it.univpm.ProgettoOOP.filter.*;
@@ -46,7 +47,7 @@ public class Controller {
 	
 	
 	@PostMapping("/Cerca")
-	 public static ArrayList<Evento> getEvento(@RequestBody JsonObject body) throws StateNotFound {
+	 public static ArrayList<Evento> getEvento(@RequestBody JsonObject body)  {
 		 JsonToClass jtc=new JsonToClass();
 		 String stateCode= body.get("stato").getAsString();
 		 ArrayList<Evento> eve = new ArrayList<Evento>();  
@@ -72,8 +73,7 @@ public class Controller {
 		 		}
 		 	}	 	
 		 }
-		 if(eve.isEmpty()) throw new StateNotFound(stateCode);
-		 else return eve;
+		  return eve;
 	}
 	/**
 	 * 
@@ -154,7 +154,7 @@ public class Controller {
 		}		
 		return eve;
 	}
-	
+}
 	
 	/*Statistiche statistiche=new Statistiche();
 	ArrayList<Stato> stati = new ArrayList<Stato>();
@@ -406,4 +406,4 @@ public class Controller {
 	} catch (IOException e) {
 		Log.report("ERRORE LETTURA FILE", e.getMessage());
 	}*/
-}
+

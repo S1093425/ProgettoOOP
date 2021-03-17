@@ -91,6 +91,7 @@ public class JsonToClass {
 												
 											}										
 											e.setSourceName(sourceName);
+
 			return e;	
 		}
 		

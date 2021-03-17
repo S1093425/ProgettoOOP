@@ -5,13 +5,13 @@ Alessandro Rongoni <b>S1092514</b><br>
 Gregorio Vecchiola <b>S1093425</b><br>
 
 <h1>Spiegazione progetto</h1><br>
-  Il progetto consiste nella gestione delle Call da SpringBoot che restituiscano informazioni riguardo agli eventi di ciascuno stato degli U.S.A. <br>
+  Il seguente programma permette di gestire le CALL da PostMan per la visualizzazione degli eventi di ciascuno stato degli U.S.A. Il codice dovrà essere importato sul programma Eclipse e mandato in run come applicazione SpringBoot. Con la chiamata alle statistiche si riceverà in risposta sia le statistiche per stato, sia le statistiche globali, entrambe si potranno filtrare a piacimento secondo dei parametri standard (per stato, per genere, per source e per data). <br>
   
    <h1><b>Premesse:</b><br></h1>
    <ul>
-   <li>Usare un PC con ampia memoria RAM se si vogliono usare stati popolari</li>
-   <li>La API non è in grado di stampare più di 1194 eventi ( page*size < 1000)</li>
-   <li>Per ricercare gli stati si usano le loro Sigle</li>
+   <li>I PC con poca memoria potrebbero avere problemi a stampare gli stati con molti eventi. Inoltre si consiglia di usare un range temporale breve per il giusto filtraggio degli eventi e per la giusta visualizzazione.</li>
+   <li>La API non è in grado di stampare più di 1194 eventi, perciò verranno visualizzati solo i primi 1194 eventi di ogni stato ( page*size<1000, size<=200).</li>
+   <li>Per ricercare gli stati, usare le sigle della seguente tabella</li>
    </ul>
    
    <h1><b>Elenco delle SIGLE degli stati degli U.S.A:</h1></b><br>
@@ -83,7 +83,7 @@ Gregorio Vecchiola <b>S1093425</b><br>
   
   ```
   
-  Nel JsonObject 'stato' inserire lo stato del quale si vorrà richiedere la lista degli eventi.<br>
+  Nel JsonObject 'stato' inserire la sigla dello stato del quale si vorrà richiedere la lista degli eventi.<br>
   
   Ritorna un ArrayList contenente gli eventi dello stato richiesto: <br>
   
@@ -91,27 +91,25 @@ Gregorio Vecchiola <b>S1093425</b><br>
   
   [
     {
-        "Nome": 6541874,
-        "Genere": "Fermo",
-        "Data Inizio": "nubi sparse",
+        "Name": "Jo Koy - Just Kidding World Tour",
+        "Genere": "Arts & Theatre",
+        "DataInizio": "Aug 13, 2022, 12:00:00 AM",
         "Stato": "Alaska",
-        "Source": 1024.0,
+        "SourceName": [
+              "Ticketmaster"
+         ]
     },
     {
-        "Nome": 6541874,
-        "Genere": "Fermo",
-        "Data Inizio": "nubi sparse",
+        "Name": "Rodney Carrington",
+        "Genere": "Arts & Theatre",
+        "DataInizio": "Aug 8, 2021, 12:00:00 AM",
         "Stato": "Alaska",
-        "Source": 1024.0,
-    },
-    {
-        "Nome": 6541874,
-        "Genere": "Fermo",
-        "Data Inizio": "nubi sparse",
-        "Stato": "Alaska",
-        "Source": 1024.0,
+        "SourceName": [
+              "Ticketmaster"
+         ]
     }
-]
+    
+   ]
   
   ```
   
@@ -124,24 +122,28 @@ Gregorio Vecchiola <b>S1093425</b><br>
   
   {
     "filtri":{
-        "tempo":{
-            "attivo":true,
-            "filtro":"Giornaliero"
+        "stati":{
+            "attivo":"True",
+            "filtro":"AK,AL"
         },
-        "ZoneGeografiche":{
-            "attivo":false,
-            "filtro":"Centro"
+        "genere":{
+            "attivo":"True",
+            "filtro":"Music,Sport"
         },
-        "nome":{
-            "attivo":true,
-            "filtro":"Fermo"
+        "dataIn":{
+            "attivo":"True",
+            "filtro":"Giornalieri"
+        },
+        "source":{
+            "attivo":"False",
+            "filtro":"Ticketmaster"
         }
     }
 }
 
 ```
 Ogni filtro ha 2 Attributi : 'Attivo' e 'Filtro'.<br>
-'Attivo' è un Boolean: se è 'True' attiva il seguente filtro ,mentre se 'False' il filtro viene disattivato.<br>
+'Attivo' è un Boolean: se è 'True' attiva il seguente filtro ,mentre se è 'False' il filtro viene disattivato.<br>
 Il paramentro 'filtro', invece, può variare a seconda del filtro che si vuole applicare:.<br>
 <h3>Filtro Stato</h3><br>
 Si può filtrare per uno o più stati, per farlo basta dividere le loro sigle con una ",". Esso flitrerà gli eventi in base allo/agli stato/i scritti.<br>
@@ -166,12 +168,18 @@ Possibili opzioni:<br>
   Ad esempio: "ticketmaster, tmr" <br>
   
   <h3>Filtro Data Inizio</h3><br>
- 
+ Si possono filtrare gli eventi per data. Ci sono diversi periodi predefiniti, inoltre si può anche impostare una data personalizzata.<br>
+ Possibili opzioni:<br>
+  - "Giornalieri": filtra gli eventi del giorno stesso. <br>
+  - "Settimanali": filtra gli eventi dei prossimi 7 giorni. <br>
+  - "Mensili": filtra gli eventi dei prossimi 31 giorni. <br>
+  - "Semestrale": filtra gli eventi dei prossimi 186 giorni. <br>
+  - "Annuali": filtra gli eventi dei prossimi 365 giorni. <br>
+  - Personalizzata: per impostare una data personalizzata bisogna inserire la data di inizio e quella di fine separati da una virgola nel seguente formato, "yyyy-mm-dd,yyyy-mm-dd"
 
-<h2>Statistiche per Stato</h2><br>
+<h2>Statistiche per Stato:</h2><br>
 
 ```json
-  
   
     {
         "Nome": 6541874,
@@ -182,12 +190,11 @@ Possibili opzioni:<br>
     }
   
   ```
-  
-<h2>Statistiche Globali(Post)</h2><br>
+  Le statistiche per stato vengono così visualizzate. 
+<h2>Statistiche Globali</h2><br>
 
 ```json
-  
-  
+   
     {
         "Nome": 6541874,
         "Genere": "Fermo",
@@ -195,10 +202,7 @@ Possibili opzioni:<br>
         "Stato": "Alaska",
         "Source": 1024.0,
     }
-  
     
-
-  
   ```
 
 <h2>Fav(Get)</h2>

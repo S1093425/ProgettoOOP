@@ -21,6 +21,7 @@ public class Statistiche {
 					case "Arts & Theatre": generi[2]++; break;
 					case "Miscellaneous": generi[3]++; break;
 				}
+
 				for(String sourceEvento: e.getSourceName()) {
 					switch(sourceEvento) {
 						case "Ticketmaster": source[0]++; break;
