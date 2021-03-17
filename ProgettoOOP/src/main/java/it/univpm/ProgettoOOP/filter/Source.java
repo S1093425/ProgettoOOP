@@ -13,14 +13,15 @@ public class Source extends Filtra {
 		ArrayList<String> sourceArray = new ArrayList<String>();
 		sourceArray= getString(source);
 		for(String s: sourceArray) {
-			int index= -1;
-			switch (s) {
-				case "Ticketweb": index=0; break;
-				case "Univerese": index=1; break;
-				case "Frontgate Tickets": index=2; break;
-				case "Ticketmaster Resale": index=3; break;
+			for(Evento e:eve) {
+				int i=0; int flag=0;
+				while((i<e.getSourceName().size()) && (flag==0))
+					if(s==e.getSourceName().get(i)) {
+						eventiFiltrati.add(e);
+						flag=1;
+					}							
 			}
-				
+
 		}
 		return eventiFiltrati;
 	}

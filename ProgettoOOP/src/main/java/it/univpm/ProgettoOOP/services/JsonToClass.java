@@ -1,5 +1,7 @@
 package it.univpm.ProgettoOOP.services;
 
+import java.util.ArrayList;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -44,17 +46,17 @@ public class JsonToClass {
 								JsonObject start = dates.get("start").getAsJsonObject();
 									try {
 										e.setDataInizio(start.get("localDate").getAsString());
-									}catch(Exception l){
-										System.out.println("Formato data errato");
-										Log.report("ERRORE FORMATO DATA",l.getMessage());
+									}catch(NullPointerException p){
+										System.out.println("Non Definito");
+										Log.report("DATA NON DEFINITA",p.getMessage());
 									}
 								try{
 									JsonArray classification = objEvent.get("classifications").getAsJsonArray();
 										JsonObject primary = classification.get(0).getAsJsonObject();
 										JsonObject genere = primary.get("segment").getAsJsonObject();
 										e.setGenere(genere.get("name").getAsString());
-								}catch(Exception p){
-									e.setGenere("Not Defined");
+								}catch(NullPointerException p){
+									e.setGenere("Non Definito");
 									Log.report("GENERE NON DEFINITO",p.getMessage());
 								}
 								JsonObject ambedded2 = objEvent.get("_embedded").getAsJsonObject();
@@ -63,16 +65,33 @@ public class JsonToClass {
 										JsonObject stato = venueObj.get("state").getAsJsonObject();
 											e.setStato(stato.get("name").getAsString()); 
 										JsonObject source= venueObj.get("upcomingEvents").getAsJsonObject();
-											int[] sourceValue= {0,0,0,0};
+											ArrayList<String> sourceName= new ArrayList<String>();
+											try {
 											if(source.get("ticketmaster").getAsInt()!=0)
-												sourceValue[0]=source.get("ticketmaster").getAsInt();
-											if(source.get("universe").getAsInt()!=0)
-												sourceValue[1]=source.get("universe").getAsInt();
-											if(source.get("frontgate").getAsInt()!=0)
-												sourceValue[2]=source.get("frontgate").getAsInt();
-											if(source.get("tmr").getAsInt()!=0)
-												sourceValue[3]=source.get("tmr").getAsInt();
-											
+												sourceName.add("Ticketmaster");
+											}catch(NullPointerException p){
+												
+											}
+											try {
+												if(source.get("universe").getAsInt()!=0)
+													sourceName.add("Universe");
+											}catch(NullPointerException p) {
+												
+											}
+											try {
+												if(source.get("frontgate").getAsInt()!=0)
+													sourceName.add("Frontgate Tickets");
+											}catch(NullPointerException p) {
+												
+											}
+											try {
+												if(source.get("tmr").getAsInt()!=0)
+													sourceName.add("Ticketmaster Resale");
+											}catch(NullPointerException p) {
+												
+											}										
+											e.setSourceName(sourceName);
+
 			return e;	
 		}
 		

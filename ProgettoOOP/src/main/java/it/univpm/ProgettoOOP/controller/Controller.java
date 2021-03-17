@@ -53,7 +53,6 @@ public class Controller {
 		 for(int j=0;j<=x;j++) {
 		 	String url="https://app.ticketmaster.com/discovery/v2/events.json?stateCode="+stateCode+"&countryCode=US&apikey=02znw2Zzu1vGIRauqzXnI595CY7TlXX1&page="+j+"&size=199";
 		 	String evento_stato=CercaEvento.getEvento(url);
-		 	System.out.println(evento_stato);
 		 	if((j==x)&&(x!=5)){
 		 		y-= (j*199);
 		 		for(int i=0; i<y;i++) {
@@ -89,6 +88,12 @@ public class Controller {
 		return JsonFinale;
 	}
 	
+	@PostMapping("/Stati")
+	public JsonObject getStati(@RequestBody JsonObject body){
+		
+		return null;
+	}
+	
 	private ArrayList<Evento> filtraEventi(JsonObject body,ArrayList<Evento> eve ) {
 		body = body.get("filtri").getAsJsonObject();
 		JsonObject attivo =body.get("stati").getAsJsonObject();
@@ -106,10 +111,10 @@ public class Controller {
 			Source filtroSo= new Source();
 			eve= filtroSo.filtra(attivo.get("filtro").getAsString(),eve);
 		}
-		 attivo =body.get("data").getAsJsonObject();
+		 attivo =body.get("periodo").getAsJsonObject();
 		if(attivo.get("attivo").getAsBoolean()) {
-			State filtroD= new State();						//...............
-			eve= filtroD.filtra(attivo.get("filtro").getAsString(),eve);
+			Periodo filtroP= new Periodo();						
+			eve= filtroP.filtra(attivo.get("filtro").getAsString(),eve);
 		}		
 		return eve;
 	}	

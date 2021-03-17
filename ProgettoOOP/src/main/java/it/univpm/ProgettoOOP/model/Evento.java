@@ -1,8 +1,12 @@
 package it.univpm.ProgettoOOP.model;
 
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+
+import it.univpm.ProgettoOOP.log.Log;
 
 public class Evento {
 
@@ -10,6 +14,7 @@ public class Evento {
 	private String Genere;
 	private Date DataInizio;
 	private String Stato;
+	private ArrayList<String> SourceName= new ArrayList<String>();
 	public Evento() {
 	}
 	
@@ -49,11 +54,19 @@ public class Evento {
 		return DataInizio;
 	}
 
-	public void setDataInizio(String dataInizio) throws Exception {
-		//DateTimeFormatter formatter= DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	public void setDataInizio(String dataInizio)  {
 		SimpleDateFormat strFormat1= new SimpleDateFormat("yyyy-MM-dd");
-		DataInizio= strFormat1.parse(dataInizio);
+		try {
+			DataInizio= strFormat1.parse(dataInizio);
+		} catch (ParseException e) {
+			Log.report("FORMATTZIONE DATA ERRATA NEL JSON. CORRETTA: [yyyy-mm-dd]",e.getMessage());
+		}		
+	}
+	public ArrayList<String> getSourceName() {
+		return SourceName;
+	}
 		
-	}}
-
-
+	public void setSourceName(ArrayList<String> sourceName) {
+		SourceName = sourceName;
+	}
+}

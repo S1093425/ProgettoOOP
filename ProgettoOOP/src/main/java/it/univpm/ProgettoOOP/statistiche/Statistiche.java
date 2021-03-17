@@ -21,7 +21,15 @@ public class Statistiche {
 					case "Arts & Theatre": generi[2]++; break;
 					case "Miscellaneous": generi[3]++; break;
 				}
-				
+
+				for(String sourceEvento: e.getSourceName()) {
+					switch(sourceEvento) {
+						case "Ticketmaster": source[0]++; break;
+						case "Universe": source[1]++; break;
+						case "Frontgate Tickets": source[2]++; break;
+						case "Ticketmaster Resale": source[3]++; break;
+					}
+				}
 			}
 		stat.setGeneri(generi);
 		stat.setSource(source);
