@@ -4,7 +4,7 @@
 Alessandro Rongoni <b>S1092514</b><br>
 Gregorio Vecchiola <b>S1093425</b><br>
 
-<h1>Spiegazione progetto</h1><br>
+<h1>Spiegazione progetto:</h1><br>
   Il seguente programma permette di gestire le CALL da PostMan per la visualizzazione degli eventi di ciascuno stato degli U.S.A. Il codice dovrà essere importato sul programma Eclipse e mandato in run come applicazione SpringBoot. Con la chiamata alle statistiche si riceverà in risposta sia le statistiche per stato, sia le statistiche globali, entrambe si potranno filtrare a piacimento secondo dei parametri standard (per stato, per genere, per source e per data). <br>
   
    <h1><b>Premesse:</b><br></h1>
@@ -130,7 +130,7 @@ Gregorio Vecchiola <b>S1093425</b><br>
             "filtro":"Music,Sport"
         },
         "source":{
-            "attivo":"False",
+            "attivo":false,
             "filtro":"Ticketmaster"
         },
         "periodo":{
@@ -141,14 +141,14 @@ Gregorio Vecchiola <b>S1093425</b><br>
 
 ```
 Ogni filtro ha 2 Attributi : 'Attivo' e 'Filtro'.<br>
-'Attivo' è un Boolean: se è 'True' attiva il seguente filtro ,mentre se è 'False' il filtro viene disattivato.<br>
-Il paramentro 'filtro', invece, può variare a seconda del filtro che si vuole applicare:.<br>
+'Attivo' è un Boolean: se è 'true' attiva il seguente filtro ,mentre se è 'false' il filtro viene disattivato.<br>
+Il paramentro 'filtro', invece, può variare a seconda del filtro che si vuole applicare:<br>
 <h3>Filtro Stato</h3><br>
-Si può filtrare per uno o più stati, per farlo basta dividere le loro sigle con una ",". Esso flitrerà gli eventi in base allo/agli stato/i scritti.<br>
-Ad esempio: "NY,NC,AL"<br>
+Si può filtrare per uno o più stati, per farlo basta dividerli con una ",". Esso flitrerà gli eventi in base allo/agli stato/i scritti.<br>
+Ad esempio: "New York,Alaska"<br>
   
 <h3>Filtro Genere</h3><br>
-Si può filtrare per uno o più generi, per farlo basta dividere i genere con una ",". Esso filtrerà gli eventi in base al/ai genere/i selezionati. <br>
+Si può filtrare per uno o più generi, per farlo basta dividere i generi con una ",". Esso filtrerà gli eventi in base al/ai genere/i selezionati. <br>
 Possibili opzioni:<br>
   -Music : Prende gli eventi musicali (concerti, musical, ecc.)<br>
   -Arts & Theatre : Prende gli eventi artistici e teatrali<br>
@@ -211,12 +211,15 @@ Le statistiche globali vengono così visualizzate. Esse mostrano:
   - Lo stato con il numero di eventi massimo/minimo di eventi divisi per source;<br>
 
 <h2>Lista Stati(Get)</h2>
-<i>localhost:8080/Stati?Action="Aggiungi"&name="Ancona"</i><br>
-Questa rotta permette di gestire gli stati standard da noi selezionati.
-<h3>Parametri</h3><br>
-Il parametro <b>action</b> può assumere i seguenti valori: <br>
--Aggiungi = Aggiunge <b>stato</b> alla lista dei favoriti<br>
--Rimuovi = Rimuove <b>stato</b> dalla lista dei favoriti<br>
--Stampa = Restituisce un JsonObject contenente la lista dei stati favoriti<br><br>
+<i>localhost:8080/StatiCerca</i><br>
+Questa rotta stampa tutti gli stati degli Stati Uniti con le relative sigle.<br>
 
-Il parametro <b>name</b> contiente l'oggetto dell'azione da eseguire sull'array di favoriti.
+<h2>Stati Preferiti(Get)</h2>
+<i><b>localhost:8080/StatiStats?Activity=</b>Aggiunta<b>&State=</b>Florida</i><br>
+<h3>Parametri:</h3><br>
+Il parametro <b>'State'</b> va riempito con il nome dello stato. Ad esempio: "Florida".<br><br>
+Il parametro <b>'Activity'</b> può assumere i seguenti valori: <br>
+-Aggiunta = Aggiunge lo <b>stato</b> alla lista dei favoriti;<br>
+-Rimozione = Rimuove <b>stato</b> dalla lista dei favoriti;<br>
+-Stampa = Restituisce un JsonObject contenente la lista degli stati favoriti. In questo caso il parametro 'State' deve essere presente, ma può rimanere vuoto;<br>
+
