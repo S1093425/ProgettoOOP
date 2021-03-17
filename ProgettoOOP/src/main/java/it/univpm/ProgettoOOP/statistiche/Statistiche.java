@@ -21,9 +21,7 @@ public class Statistiche {
 					case "Arts & Theatre": generi[2]++; break;
 					case "Miscellaneous": generi[3]++; break;
 				}
-				for(int i=0; i<4;i++)
-					if(e.getSourceValue()[i]!=0)
-						source[i]++;
+				
 			}
 		stat.setGeneri(generi);
 		stat.setSource(source);

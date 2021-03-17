@@ -20,9 +20,7 @@ public class Source extends Filtra {
 				case "Frontgate Tickets": index=2; break;
 				case "Ticketmaster Resale": index=3; break;
 			}
-			for(Evento e:eve)
-				if(e.getSourceValue()[index]!=0)
-					eventiFiltrati.add(e);			
+				
 		}
 		return eventiFiltrati;
 	}

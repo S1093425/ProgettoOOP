@@ -72,7 +72,7 @@ public class JsonToClass {
 												sourceValue[2]=source.get("frontgate").getAsInt();
 											if(source.get("tmr").getAsInt()!=0)
 												sourceValue[3]=source.get("tmr").getAsInt();
-											e.setSourceValue(sourceValue);
+											
 			return e;	
 		}
 		
