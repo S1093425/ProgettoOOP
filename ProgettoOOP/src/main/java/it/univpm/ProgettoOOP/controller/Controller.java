@@ -2,8 +2,12 @@ package it.univpm.ProgettoOOP.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
+
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -11,9 +15,11 @@ import com.google.gson.JsonSyntaxException;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import it.univpm.ProgettoOOP.exception.IllegalRequest;
 import it.univpm.ProgettoOOP.exception.StateNotFound;
 import it.univpm.ProgettoOOP.filter.*;
 import it.univpm.ProgettoOOP.log.Log;
@@ -26,6 +32,7 @@ import it.univpm.ProgettoOOP.services.CercaEvento;
  * @version 1.0as
  */
 import it.univpm.ProgettoOOP.services.JsonToClass;
+import it.univpm.ProgettoOOP.services.ListaStati;
 import it.univpm.ProgettoOOP.statistiche.Statistiche;
 /**
  * 
@@ -74,11 +81,12 @@ public class Controller {
 	@PostMapping("/Stats")
 	public JsonObject getStats(@RequestBody JsonObject body){
 		JsonToClass jtc=new JsonToClass();
+		ListaStati ls= new ListaStati();
 		JsonObject JsonFinale= new JsonObject();
 		JsonArray JsonStatistiche= new JsonArray();
 		JsonFinale.add("Statistiche", JsonStatistiche);
 		ArrayList<Evento> eve = new ArrayList<Evento>();//..............
-		ArrayList<String> stati = new ArrayList<String>();//............
+		ArrayList<String> stati = ls.getStati();
 		Statistiche stats= new Statistiche();
 		eve= filtraEventi(body, eve);
 		for(String stringa: stati) {
@@ -88,10 +96,38 @@ public class Controller {
 		return JsonFinale;
 	}
 	
-	@PostMapping("/Stati")
-	public JsonObject getStati(@RequestBody JsonObject body){
-		
-		return null;
+	@GetMapping("/StatiStats")
+	public ArrayList<String> getStatiStats(@RequestParam(name = "State")String stato,@RequestParam(name = "Activity")String attivita) throws IllegalRequest{
+		ListaStati ls=new ListaStati();
+		ArrayList<String> stati= new ArrayList<String>();
+		switch(attivita) {
+			case "Aggiunta":
+				ls.aggiungiStato(stato);
+				stati=ls.getStati();
+				return stati;
+			case "Rimozione":
+				ls.rimuoviStato(stato);
+				stati=ls.getStati();
+				return stati;
+			case "Stampa":
+				stati=ls.getStati();
+				return stati;
+			default:
+				throw new IllegalRequest(attivita);
+		}
+	}
+	
+	@GetMapping("/StatiCerca")
+	public JsonObject getStatiCerca() {
+			JsonObject jo=new JsonObject();
+			try {
+				BufferedReader buffer = new BufferedReader(new FileReader(new File("sigle.json")));
+				jo = JsonParser.parseReader(buffer).getAsJsonObject();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		return jo;
 	}
 	
 	private ArrayList<Evento> filtraEventi(JsonObject body,ArrayList<Evento> eve ) {
@@ -117,7 +153,9 @@ public class Controller {
 			eve= filtroP.filtra(attivo.get("filtro").getAsString(),eve);
 		}		
 		return eve;
-	}	
+	}
+	
+	
 	/*Statistiche statistiche=new Statistiche();
 	ArrayList<Stato> stati = new ArrayList<Stato>();
 	JsonObject JsonFinale= new JsonObject();		
