@@ -13,8 +13,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 
-
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -247,8 +245,7 @@ public class Controller {
 		System.out.println(statsGeneriMax.get(2).getArt());
 		System.out.println(statsGeneriMin.get(2).getArt());
 		System.out.println(statsGeneriMax.get(3).getMix());
-		System.out.println(statsGeneriMin.get(3).getMix());
-		
+		System.out.println(statsGeneriMin.get(3).getMix());		
 			JsonObject JsonStatGlob = new JsonObject();
 			JsonStatisticheGlobali.add(JsonStatGlob);
 				JsonArray JsonMaxStatiArr=new JsonArray();
