@@ -9,8 +9,8 @@ Gregorio Vecchiola <b>S1093425</b><br>
   
    <h1><b>Premesse:</b><br></h1>
    <ul>
-   <li>I PC con poca memoria potrebbero avere lunghi tempi d'attesa per stampare gli stati con molti eventi. Inoltre si consiglia di usare un range temporale breve per il giusto filtraggio degli eventi e per la giusta visualizzazione.</li>
-   <li>La API non è in grado di stampare più di 1194 eventi, perciò verranno visualizzati solo i primi 1194 eventi di ogni stato.</li>
+   <li>I PC con poca memoria potrebbero avere problemi a stampare gli stati con molti eventi. Inoltre si consiglia di usare un range temporale breve per il giusto filtraggio degli eventi e per la giusta visualizzazione.</li>
+   <li>La API non è in grado di stampare più di 1194 eventi, perciò verranno visualizzati solo i primi 1194 eventi di ogni stato ( page*size<1000, size<=200).</li>
    <li>Per ricercare gli stati, usare le sigle della seguente tabella</li>
    </ul>
    
@@ -83,7 +83,7 @@ Gregorio Vecchiola <b>S1093425</b><br>
   
   ```
   
-  Nel JsonObject 'stato' inserire lo stato del quale si vorrà richiedere la lista degli eventi.<br>
+  Nel JsonObject 'stato' inserire la sigla dello stato del quale si vorrà richiedere la lista degli eventi.<br>
   
   Ritorna un ArrayList contenente gli eventi dello stato richiesto: <br>
   
@@ -177,7 +177,7 @@ Possibili opzioni:<br>
   - "Annuali": filtra gli eventi dei prossimi 365 giorni. <br>
   - Personalizzata: per impostare una data personalizzata bisogna inserire la data di inizio e quella di fine separati da una virgola nel seguente formato, "yyyy-mm-dd,yyyy-mm-dd"
 
-<h2>Statistiche per Stato</h2><br>
+<h2>Statistiche per Stato:</h2><br>
 
 ```json
   
@@ -190,7 +190,7 @@ Possibili opzioni:<br>
     }
   
   ```
-  
+  Le statistiche per stato vengono così visualizzate. 
 <h2>Statistiche Globali</h2><br>
 
 ```json
