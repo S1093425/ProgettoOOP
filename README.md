@@ -11,10 +11,10 @@ Gregorio Vecchiola <b>S1093425</b><br>
    <ul>
    <li>I PC con poca memoria potrebbero avere problemi a stampare gli stati con molti eventi. Inoltre si consiglia di usare un range temporale breve per il giusto filtraggio degli eventi e per la giusta visualizzazione.</li>
    <li>La API non è in grado di stampare più di 1194 eventi, perciò verranno visualizzati solo i primi 1194 eventi di ogni stato ( page*size<1000, size<=200).</li>
-   <li>Per ricercare gli stati, usare le sigle della seguente tabella</li>
+   <li>Per la rotta cerca si usano le sigle degli stati della seguente ricerca, mentre per il filtraggio,si usa il nome.</li>
    </ul>
    
-   <h1><b>Elenco delle SIGLE degli stati degli U.S.A:</h1></b><br>
+   <h1><b>Elenco delle SIGLE e NOMI degli stati degli U.S.A:</h1></b><br>
    
   <table> 
   <tr><td><b><h3>Sigla</h3></b></td><td><b><h3>Stato</h3></b></td><td><b><h3>Capitale</h3></b></td></tr> 
@@ -121,25 +121,23 @@ Gregorio Vecchiola <b>S1093425</b><br>
   ```json
   
   {
-    "filtri":{
         "stati":{
-            "attivo":"True",
-            "filtro":"AK,AL"
+            "attivo":true,
+            "filtro":"Alaska","Alabama"
         },
-        "genere":{
-            "attivo":"True",
+        "generi":{
+            "attivo":true,
             "filtro":"Music,Sport"
-        },
-        "dataIn":{
-            "attivo":"True",
-            "filtro":"Giornalieri"
         },
         "source":{
             "attivo":"False",
             "filtro":"Ticketmaster"
+        },
+        "periodo":{
+            "attivo":true,
+            "filtro":"2021-04-12,2021-05-23"
         }
-    }
-}
+  }
 
 ```
 Ogni filtro ha 2 Attributi : 'Attivo' e 'Filtro'.<br>
@@ -190,8 +188,11 @@ Possibili opzioni:<br>
     }
   
   ```
-  Le statistiche per stato vengono così visualizzate. 
-<h2>Statistiche Globali</h2><br>
+  Le statistiche per stato vengono così visualizzate. Esse mostrano:
+  - Il numero di eventi totali dello stato;<br>
+  - Il numero di eventi divisi per genere;<br>
+  - Il numero di eventi divisi per source;<br>
+<h2>Statistiche Globali:</h2><br>
 
 ```json
    
@@ -204,14 +205,18 @@ Possibili opzioni:<br>
     }
     
   ```
+Le statistiche globali vengono così visualizzate. Esse mostrano:
+  - Lo stato con il numero di eventi massimo/minimo di eventi in generale;<br>
+  - Lo stato con il numero di eventi massimo/minimo di eventi divisi per genere;<br>
+  - Lo stato con il numero di eventi massimo/minimo di eventi divisi per source;<br>
 
-<h2>Fav(Get)</h2>
-<i>localhost:8080/Fav?Action="Aggiungi"&name="Ancona"</i>
-<br>
+<h2>Lista Stati(Get)</h2>
+<i>localhost:8080/Stati?Action="Aggiungi"&name="Ancona"</i><br>
+Questa rotta permette di gestire gli stati standard da noi selezionati.
 <h3>Parametri</h3><br>
 Il parametro <b>action</b> può assumere i seguenti valori: <br>
--Aggiungi = Aggiunge <b>name</b> alla lista dei favoriti<br>
--Rimuovi = Rimuove <b>name</b> dalla lista dei favoriti<br>
--Stampa = Restituisce un JsonObject contenente la lista dei favoriti<br><br>
+-Aggiungi = Aggiunge <b>stato</b> alla lista dei favoriti<br>
+-Rimuovi = Rimuove <b>stato</b> dalla lista dei favoriti<br>
+-Stampa = Restituisce un JsonObject contenente la lista dei stati favoriti<br><br>
 
 Il parametro <b>name</b> contiente l'oggetto dell'azione da eseguire sull'array di favoriti.
