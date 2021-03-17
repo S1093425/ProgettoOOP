@@ -216,6 +216,7 @@ Questa rotta stampa tutti gli stati degli Stati Uniti con le relative sigle.<br>
 
 <h2>Stati Preferiti(Get)</h2>
 <i><b>localhost:8080/StatiStats?Activity=</b>Aggiunta<b>&State=</b>Florida</i><br>
+Questa rotta permette di gestire la lista degli stati standard già selezionati da noi. La lista può essere modificata in qualisasi momento dall'utente grazie alle varie azioni.<br>
 <h3>Parametri:</h3><br>
 Il parametro <b>'State'</b> va riempito con il nome dello stato. Ad esempio: "Florida".<br><br>
 Il parametro <b>'Activity'</b> può assumere i seguenti valori: <br>
