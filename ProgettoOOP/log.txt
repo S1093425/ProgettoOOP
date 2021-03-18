@@ -58,3 +58,7 @@ Errore avvenuto in data :Tue Mar 16 19:22:54 CET 2021
 Errore avvenuto in data :Wed Mar 17 18:35:33 CET 2021
      Causa: LO STATO Alaska NON E' STATO TROVATO
      Dettagli: Inserire uno stato dell'USA presente in lista o controllare la formattazione
+
+Errore avvenuto in data :Thu Mar 18 16:11:37 CET 2021
+     Causa: LA SCELTA EFFETTUATA NON E'CONSENTITA
+     Dettagli: Aggiungi NON E' UN'AZIONE CHE PUO' ESSERE ESEGUITA
