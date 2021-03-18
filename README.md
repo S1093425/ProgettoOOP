@@ -153,10 +153,10 @@ Ad esempio: "New York,Alaska"<br>
 <h3>Filtro Genere</h3><br>
 Si può filtrare per uno o più generi, per farlo basta dividere i generi con una ",". Esso filtrerà gli eventi in base al/ai genere/i selezionati. <br>
 Possibili opzioni:<br>
-  -Music : Prende gli eventi musicali (concerti, musical, ecc.)<br>
-  -Arts & Theatre : Prende gli eventi artistici e teatrali<br>
-  -Sport : Prende eventi gli sportivi<br>
-  -Miscellaneous : Prende gli eventi di tipo misto<br>
+  -Music : Prende gli eventi musicali (concerti, musical, ecc.);<br>
+  -Arts & Theatre : Prende gli eventi artistici e teatrali;<br>
+  -Sport : Prende eventi gli sportivi;<br>
+  -Miscellaneous : Prende gli eventi di tipo misto, essi vengono considerate anche nelle categorie menzionate precedentemente;<br>
   Ad esempio: "Music, Arts & Theatre" <br>
 
 <h3>Filtro Source</h3><br>
@@ -181,14 +181,30 @@ Possibili opzioni:<br>
 <h2>Statistiche per Stato:</h2><br>
 
 ```json
-  
-    {
-        "Nome": 6541874,
-        "Genere": "Fermo",
-        "Data Inizio": "nubi sparse",
-        "Stato": "Alaska",
-        "Source": 1024.0,
-    }
+  {
+    "Statistiche": [
+                {
+            "Stato": "Alaska",
+            "Eventi Totali": 2,
+            "Generi": [
+                    {
+                    "Musica": 0,
+                    "Sport": 0,
+                    "Arte e Teatro": 2,
+                    "Misto": 0
+                    }
+            ],
+            "Source": [
+                  {
+                    "Ticketmaster": 2,
+                    "Universe": 0,
+                    "Frontgate Tickets": 0,
+                    "Ticketmaster Resale": 0
+                   }
+                ]
+             }
+          ]
+   }
   
   ```
   Le statistiche per stato vengono così visualizzate. Esse mostrano:
@@ -200,11 +216,158 @@ Possibili opzioni:<br>
 ```json
    
     {
-        "Nome": 6541874,
-        "Genere": "Fermo",
-        "Data Inizio": "nubi sparse",
-        "Stato": "Alaska",
-        "Source": 1024.0,
+        "Statistiche Globali": [
+        {
+            "Stato con più eventi": [
+                {
+                    "Nome": "Alabama",
+                    "Eventi": 336
+                }
+            ],
+            "Stato con meno eventi": [
+                {
+                    "Nome": "Alaska",
+                    "Eventi": 2
+                }
+            ],
+            "Statistiche per Source": [
+                {
+                    "Ticketmaster": [
+                        {
+                            "Stato con più eventi Ticketmaster": [
+                                {
+                                    "Nome": "Alabama",
+                                    "Eventi": 300
+                                }
+                            ],
+                            "Stato con meno eventi Ticketmaster": [
+                                {
+                                    "Nome": "Alaska",
+                                    "Eventi": 2
+                                }
+                            ]
+                        }
+                    ],
+                    "Universe": [
+                        {
+                            "Stato con più eventi Universe": [
+                                {
+                                    "Nome": "Alaska",
+                                    "Eventi": 0
+                                }
+                            ],
+                            "Stato con meno eventi Universe": [
+                                {
+                                    "Nome": "Alaska",
+                                    "Eventi": 0
+                                }
+                            ]
+                        }
+                    ],
+                    "Frontgate Tickets": [
+                        {
+                            "Stato con più eventi Frontgate Tickets": [
+                                {
+                                    "Nome": "Alaska",
+                                    "Eventi": 0
+                                }
+                            ],
+                            "Stato con meno eventi Frontgate Tickets": [
+                                {
+                                    "Nome": "Alaska",
+                                    "Eventi": 0
+                                }
+                            ]
+                        }
+                    ],
+                    "Ticketmaster Resale": [
+                        {
+                            "Stato con più eventi Tickemaster Resale": [
+                                {
+                                    "Nome": "Alaska",
+                                    "Eventi": 0
+                                }
+                            ],
+                            "Stato con meno eventi Ticketmaster Resale": [
+                                {
+                                    "Nome": "Alaska",
+                                    "Eventi": 0
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "Statistiche per Genere": [
+                {
+                    "Musica": [
+                        {
+                            "Stato con più eventi Musica": [
+                                {
+                                    "Nome": "Alabama",
+                                    "Eventi": 220
+                                }
+                            ],
+                            "Stato con meno eventi Musica": [
+                                {
+                                    "Nome": "Alaska",
+                                    "Eventi": 0
+                                }
+                            ]
+                        }
+                    ],
+                    "Sport": [
+                        {
+                            "Stato con più eventi Sport": [
+                                {
+                                    "Nome": "Alaska",
+                                    "Eventi": 0
+                                }
+                            ],
+                            "Stato con meno eventi Sport": [
+                                {
+                                    "Nome": "Alaska",
+                                    "Eventi": 0
+                                }
+                            ]
+                        }
+                    ],
+                    "Arte e Teatro": [
+                        {
+                            "Stato con più eventi Arte e Teatro": [
+                                {
+                                    "Nome": "Alabama",
+                                    "Eventi": 68
+                                }
+                            ],
+                            "Stato con meno eventi Arte e Teatro": [
+                                {
+                                    "Nome": "Alaska",
+                                    "Eventi": 2
+                                }
+                            ]
+                        }
+                    ],
+                    "Misto": [
+                        {
+                            "Stato con più eventi Misti": [
+                                {
+                                    "Nome": "Alabama",
+                                    "Eventi": 10
+                                }
+                            ],
+                            "Stato con meno eventi Misti": [
+                                {
+                                    "Nome": 0,
+                                    "Eventi": 0
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
     }
     
   ```
