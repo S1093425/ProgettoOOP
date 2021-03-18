@@ -5,14 +5,16 @@ Alessandro Rongoni <b>S1092514</b><br>
 Gregorio Vecchiola <b>S1093425</b><br>
 
 <h1>Spiegazione progetto:</h1><br>
-  Il seguente programma permette di gestire le CALL da PostMan per la visualizzazione degli eventi di ciascuno stato degli U.S.A. Il codice dovrà essere importato sul programma Eclipse e mandato in run come applicazione SpringBoot. Con la chiamata alle statistiche si riceverà in risposta sia le statistiche per stato, sia le statistiche globali, entrambe si potranno filtrare a piacimento secondo dei parametri standard (per stato, per genere, per source e per data). <br>
+  Il seguente programma permette di gestire le CALL da PostMan per la visualizzazione degli eventi di ciascuno stato degli U.S.A. Il codice dovrà essere importato sul programma Eclipse e mandato in run come applicazione SpringBoot. Con la chiamata alle statistiche si riceverà in risposta sia le statistiche per stato, sia le statistiche globali, entrambe si potranno filtrare a piacimento secondo dei parametri standard (per stato, per genere, per source e per data). Inoltre, il programma è provvisto di un file di testo LOG dove vengono scritti eventuali errori durante l'utilizzo. <br>
   
    <h1><b>Premesse:</b><br></h1>
    <ul>
    <li>I PC con poca memoria potrebbero avere problemi a stampare gli stati con molti eventi. Inoltre si consiglia di usare un range temporale breve per il giusto filtraggio degli eventi e per la giusta visualizzazione.</li>
+  <li>Dopo aver aggiunto gli stati all'interno degli stati preferiti, si raccomanda di riavviare il programma.</li>
+  <li>Aspettare che in console esca uscito il messaggio "Database aggiornato", successivamente fare la chiamata da Postman.</li>
    <li>Lo stato "California" non funziona in quanto ha un problema sulla formattazione del JSON.</li>
    <li>La API non è in grado di stampare più di 1194 eventi, perciò verranno visualizzati solo i primi 1194 eventi di ogni stato ( page*size<1000, size<=200).</li>
-   <li>Per la rotta cerca si usano le sigle degli stati della seguente ricerca, mentre per il filtraggio,si usa il nome.</li>
+   <li>Per la rotta "/Cerca", si usano le sigle degli stati della seguente ricerca, mentre per le statistiche,si usa il nome completo.</li>
    </ul>
    
    <h1><b>Elenco delle SIGLE e NOMI degli stati degli U.S.A:</h1></b><br>
