@@ -15,7 +15,6 @@ public class CercaEvento {
 		String evento_stato = "";
 
 		try {
-
 			URLConnection openConnection = (URLConnection) new URL(url).openConnection();
 			Scanner in = new Scanner(new BufferedReader(new InputStreamReader(openConnection.getInputStream())));
 			evento_stato += in.nextLine();

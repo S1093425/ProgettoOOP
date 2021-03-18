@@ -2,18 +2,18 @@ package it.univpm.ProgettoOOP.model;
 
 public class Stato {
 		
-		private String StateCode;
+		private String Stato;
 		private int Eventi_Totali;
 		private int[] Source=new int[4];
 		private int[] Generi=new int[4];
 		public Stato() {
 			
 		}
-		public String getStateCode() {
-			return StateCode;
+		public String getStato() {
+			return Stato;
 		}
-		public void setStateCode(String stateCode) {
-			StateCode = stateCode;
+		public void setStato(String stato) {
+			Stato = stato;
 		}
 		public int getEventi_Totali() {
 			return Eventi_Totali;
@@ -32,6 +32,5 @@ public class Stato {
 		}
 		public void setGeneri(int[] generi) {
 			Generi = generi;
-		}
-		
+		}	
 }
