@@ -153,10 +153,10 @@ Ad esempio: "New York,Alaska"<br>
 <h3>Filtro Genere</h3><br>
 Si può filtrare per uno o più generi, per farlo basta dividere i generi con una ",". Esso filtrerà gli eventi in base al/ai genere/i selezionati. <br>
 Possibili opzioni:<br>
-  -Music : Prende gli eventi musicali (concerti, musical, ecc.)<br>
-  -Arts & Theatre : Prende gli eventi artistici e teatrali<br>
-  -Sport : Prende eventi gli sportivi<br>
-  -Miscellaneous : Prende gli eventi di tipo misto<br>
+  -Music : Prende gli eventi musicali (concerti, musical, ecc.);<br>
+  -Arts & Theatre : Prende gli eventi artistici e teatrali;<br>
+  -Sport : Prende eventi gli sportivi;<br>
+  -Miscellaneous : Prende gli eventi di tipo misto, essi vengono considerate anche nelle categorie menzionate precedentemente;<br>
   Ad esempio: "Music, Arts & Theatre" <br>
 
 <h3>Filtro Source</h3><br>
