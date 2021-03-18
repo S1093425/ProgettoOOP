@@ -60,7 +60,7 @@ public class DatabaseEventi extends TimerTask {
 			s=jo.get(stato).getAsString();
 			buffer.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			// TODO Auto-generated
 			e.printStackTrace();
 		}
 		return s;
