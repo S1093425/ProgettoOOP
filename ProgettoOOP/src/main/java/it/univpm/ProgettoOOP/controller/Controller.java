@@ -43,7 +43,7 @@ import it.univpm.ProgettoOOP.services.DatabaseEventi;
 public class Controller {
 
 	@PostMapping("/Cerca")
-	 public static ArrayList<Evento> getEvento(@RequestBody JsonObject body)  {
+	 public static ArrayList<Evento> getEvento(@RequestBody JsonObject body) throws StateNotFound  {
 		 JsonToClass jtc=new JsonToClass();
 		 String stateCode= body.get("stato").getAsString();
 		 ArrayList<Evento> eve = new ArrayList<Evento>();  
@@ -69,7 +69,8 @@ public class Controller {
 		 		}
 		 	}	 	
 		 }
-		  return eve;
+		 if(eve.isEmpty()) throw new StateNotFound(stateCode);
+		 else return eve;
 	}
 	/**
 	 * 

@@ -18,11 +18,12 @@ public class Evento {
 	public Evento() {
 	}
 	
-	public Evento(String name, String genere, Date datainizio, String stato) {
-	this.Name=name;
-	this.Genere=genere;
-	this.DataInizio=datainizio;
-	this.Stato=stato;
+	public Evento(String name, String genere, Date datainizio, String stato, ArrayList<String> sourcename) {
+	Name=name;
+	Genere=genere;
+	DataInizio=datainizio;
+	Stato=stato;
+	SourceName=sourcename;
 	
 	}
 	
