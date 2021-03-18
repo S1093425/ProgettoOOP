@@ -390,5 +390,26 @@ Il parametro <b>'Activity'</b> può assumere i seguenti valori: <br>
 -Rimozione = Rimuove <b>stato</b> dalla lista dei favoriti;<br>
 -Stampa = Restituisce un JsonObject contenente la lista degli stati favoriti. In questo caso il parametro 'State' deve essere presente, ma può rimanere vuoto;<br>
 <h1>Diagrammi UML</h1><br>
+<h3>Diagramma dei casi d'uso:</h3><br>
+
 <h3>Diagramma delle classi:</h3><br>
+
+<h3> it.univpm.ProgettoOOP</h3>
+<img src="https://github.com/S1093425/ProgettoOOP/blob/master/Digramma_delle_classi/application.PNG">
+<h3> it.univpm.ProgettoOOP.controller</h3>
+<img src="https://github.com/S1093425/ProgettoOOP/blob/master/Digramma_delle_classi/controller.PNG">
+<h3> it.univpm.ProgettoOOP</h3>
+<img src="https://github.com/S1093425/ProgettoOOP/blob/master/Digramma_delle_classi/exception.PNG">
+<h3> it.univpm.ProgettoOOP</h3>
+<img src="https://github.com/S1093425/ProgettoOOP/blob/master/Digramma_delle_classi/filter.PNG">
+<h3> it.univpm.ProgettoOOP</h3>
+<img src="https://github.com/S1093425/ProgettoOOP/blob/master/Digramma_delle_classi/model.PNG">
+<h3> it.univpm.ProgettoOOP</h3>
+<img src="https://github.com/S1093425/ProgettoOOP/blob/master/Digramma_delle_classi/services.PNG">
+<h3> it.univpm.ProgettoOOP</h3>
+<img src="https://github.com/S1093425/ProgettoOOP/blob/master/Digramma_delle_classi/statistiche.PNG">
+<h3> it.univpm.ProgettoOOP</h3>
+<img src="https://github.com/S1093425/ProgettoOOP/blob/master/Digramma_delle_classi/Log.PNG">
+
+<h3>Diagramma delle sequenze</h3><br>
 
