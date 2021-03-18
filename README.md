@@ -394,21 +394,21 @@ Il parametro <b>'Activity'</b> può assumere i seguenti valori: <br>
 <img src="https://github.com/S1093425/ProgettoOOP/blob/master/WhatsApp%20Image%202021-03-18%20at%2023.53.31.jpeg">
 <h3>Diagramma delle classi:</h3><br>
 
-<h3> it.univpm.ProgettoOOP</h3>
+<h3> it.univpm.ProgettoOOP.application</h3>
 <img src="https://github.com/S1093425/ProgettoOOP/blob/master/Digramma_delle_classi/application.PNG">
 <h3> it.univpm.ProgettoOOP.controller</h3>
 <img src="https://github.com/S1093425/ProgettoOOP/blob/master/Digramma_delle_classi/controller.PNG">
-<h3> it.univpm.ProgettoOOP</h3>
+<h3> it.univpm.ProgettoOOP.exception</h3>
 <img src="https://github.com/S1093425/ProgettoOOP/blob/master/Digramma_delle_classi/exception.PNG">
-<h3> it.univpm.ProgettoOOP</h3>
+<h3> it.univpm.ProgettoOOP.filter</h3>
 <img src="https://github.com/S1093425/ProgettoOOP/blob/master/Digramma_delle_classi/filter.PNG">
-<h3> it.univpm.ProgettoOOP</h3>
+<h3> it.univpm.ProgettoOOP.model</h3>
 <img src="https://github.com/S1093425/ProgettoOOP/blob/master/Digramma_delle_classi/model.PNG">
-<h3> it.univpm.ProgettoOOP</h3>
+<h3> it.univpm.ProgettoOOP.services</h3>
 <img src="https://github.com/S1093425/ProgettoOOP/blob/master/Digramma_delle_classi/services.PNG">
-<h3> it.univpm.ProgettoOOP</h3>
+<h3> it.univpm.ProgettoOOP.statistiche</h3>
 <img src="https://github.com/S1093425/ProgettoOOP/blob/master/Digramma_delle_classi/statistiche.PNG">
-<h3> it.univpm.ProgettoOOP</h3>
+<h3> it.univpm.ProgettoOOP.log</h3>
 <img src="https://github.com/S1093425/ProgettoOOP/blob/master/Digramma_delle_classi/Log.PNG">
 
 <h3>Diagramma delle sequenze</h3><br>
