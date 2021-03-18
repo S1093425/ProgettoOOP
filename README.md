@@ -389,4 +389,6 @@ Il parametro <b>'Activity'</b> può assumere i seguenti valori: <br>
 -Aggiunta = Aggiunge lo <b>stato</b> alla lista dei favoriti;<br>
 -Rimozione = Rimuove <b>stato</b> dalla lista dei favoriti;<br>
 -Stampa = Restituisce un JsonObject contenente la lista degli stati favoriti. In questo caso il parametro 'State' deve essere presente, ma può rimanere vuoto;<br>
+<h1>Diagrammi UML</h1><br>
+<h3>Diagramma delle classi:</h3><br>
 
