@@ -5,7 +5,7 @@ Alessandro Rongoni <b>S1092514</b><br>
 Gregorio Vecchiola <b>S1093425</b><br>
 
 <h1>Spiegazione progetto:</h1><br>
-  Il seguente programma permette di gestire le CALL da PostMan per la visualizzazione degli eventi di ciascuno stato degli U.S.A. Il codice dovrà essere importato sul programma Eclipse e mandato in run come applicazione SpringBoot. Con la chiamata alle statistiche si riceverà in risposta sia le statistiche per stato, sia le statistiche globali, entrambe si potranno filtrare a piacimento secondo dei parametri standard (per stato, per genere, per source e per data). <br>
+  Il seguente programma permette di gestire le CALL da PostMan per la visualizzazione degli eventi di ciascuno stato degli U.S.A. Il codice dovrà essere importato sul programma Eclipse e mandato in run come applicazione SpringBoot. Con la chiamata alle statistiche si riceverà in risposta sia le statistiche per stato, sia le statistiche globali, entrambe si potranno filtrare a piacimento secondo dei parametri standard (per stato, per genere, per source e per data). Inoltre, il programma è provvisto di un file di testo LOG dove vengono scritti eventuali errori durante l'utilizzo. <br>
   
    <h1><b>Premesse:</b><br></h1>
    <ul>
