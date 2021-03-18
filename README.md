@@ -391,7 +391,7 @@ Il parametro <b>'Activity'</b> può assumere i seguenti valori: <br>
 -Stampa = Restituisce un JsonObject contenente la lista degli stati favoriti. In questo caso il parametro 'State' deve essere presente, ma può rimanere vuoto;<br>
 <h1>Diagrammi UML</h1><br>
 <h3>Diagramma dei casi d'uso:</h3><br>
-
+<img src="https://github.com/S1093425/ProgettoOOP/blob/master/WhatsApp%20Image%202021-03-18%20at%2023.53.31.jpeg">
 <h3>Diagramma delle classi:</h3><br>
 
 <h3> it.univpm.ProgettoOOP</h3>
@@ -412,4 +412,4 @@ Il parametro <b>'Activity'</b> può assumere i seguenti valori: <br>
 <img src="https://github.com/S1093425/ProgettoOOP/blob/master/Digramma_delle_classi/Log.PNG">
 
 <h3>Diagramma delle sequenze</h3><br>
-
+<img src="https://github.com/S1093425/ProgettoOOP/blob/master/WhatsApp%20Image%202021-03-18%20at%2023.49.02.jpeg">
