@@ -16,7 +16,7 @@ public class Statistiche {
 		Stato stat= new Stato();
 		int[] generi= {0,0,0,0};
 		int[] source= {0,0,0,0};
-		for(Evento e: eventi) 
+		for(Evento e: eventi) {
 			if(e.getStato().equals(stato)) {
 				stat.setStato(stato);
 				stat.setEventi_Totali(stat.getEventi_Totali()+1);
@@ -35,6 +35,7 @@ public class Statistiche {
 						case "Ticketmaster Resale": source[3]++; break;
 					}
 				}
+		}
 		}
 		stat.setGeneri(generi);
 		stat.setSource(source);

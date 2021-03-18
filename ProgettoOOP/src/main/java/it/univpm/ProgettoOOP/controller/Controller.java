@@ -18,6 +18,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+
+import it.univpm.ProgettoOOP.exception.EventException;
 import it.univpm.ProgettoOOP.exception.IllegalRequest;
 import it.univpm.ProgettoOOP.exception.StateNotFound;
 import it.univpm.ProgettoOOP.filter.*;
@@ -90,13 +92,20 @@ public class Controller {
 		ArrayList<Stato> statisticheStato = new ArrayList<Stato>();
 		for(String stringa: stati) {
 			Stato s = stats.getStatsStato(eve, stringa);
-			JsonStatistiche.add(jtc.getJsonFromStats(s));
-			statisticheStato.add(s);
+			if(s.getEventi_Totali()!=0) {
+				JsonStatistiche.add(jtc.getJsonFromStats(s));
+				statisticheStato.add(s);
+			}
 		}
 		JsonArray JsonStatisticheGlobali= new JsonArray();
 		JsonFinale.add("Statistiche Globali", JsonStatisticheGlobali);
 		Global statisticheGlobali= stats.getStatsGlobal(statisticheStato);
-		JsonStatisticheGlobali.add(jtc.getJsonFromGlobalStats(statisticheGlobali));
+		try {
+			JsonStatisticheGlobali.add(jtc.getJsonFromGlobalStats(statisticheGlobali));
+		} catch (EventException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return JsonFinale;
 	}
 	
@@ -138,25 +147,22 @@ public class Controller {
 		body = body.getAsJsonObject();
 		JsonObject attivo =body.get("stati").getAsJsonObject();
 		if(attivo.get("attivo").getAsBoolean()) {
-			System.out.println("filtroattivo");
 			State filtroS= new State();
 			eve= filtroS.filtra(attivo.get("filtro").getAsString(),eve);
 		}
 		 attivo =body.get("generi").getAsJsonObject();
 		if(attivo.get("attivo").getAsBoolean()) {
-			System.out.println("filtroattivo");
 			Genere filtroG= new Genere();
 			eve= filtroG.filtra(attivo.get("filtro").getAsString(),eve);
 		}
 		 attivo =body.get("source").getAsJsonObject();
 		if(attivo.get("attivo").getAsBoolean()) {
-			System.out.println("filtroattivo");
 			Source filtroSo= new Source();
 			eve= filtroSo.filtra(attivo.get("filtro").getAsString(),eve);
+			System.out.println(eve.size());
 		}
 		 attivo =body.get("periodo").getAsJsonObject();
 		if(attivo.get("attivo").getAsBoolean()) {
-			System.out.println("filtroattivo");
 			Periodo filtroP= new Periodo();						
 			eve= filtroP.filtra(attivo.get("filtro").getAsString(),eve);
 		}		

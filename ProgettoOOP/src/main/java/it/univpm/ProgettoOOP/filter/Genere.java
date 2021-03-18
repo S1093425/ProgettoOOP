@@ -14,7 +14,7 @@ public class Genere extends Filtra {
 		genereArray= getString(genere);
 		for(String s: genereArray) 
 			for(Evento e:eve)
-				if(e.getGenere()==s)
+				if(e.getGenere().equals(s))
 					eventiFiltrati.add(e);
 		return eventiFiltrati;
 	}

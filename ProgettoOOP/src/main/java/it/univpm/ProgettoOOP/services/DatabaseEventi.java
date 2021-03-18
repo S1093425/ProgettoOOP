@@ -50,6 +50,7 @@ public class DatabaseEventi extends TimerTask {
 			 	}	 	
 			 }
 		}
+		System.out.println("Database Aggiornato.");
 	}
 	
 	public String getSigla(String stato) {

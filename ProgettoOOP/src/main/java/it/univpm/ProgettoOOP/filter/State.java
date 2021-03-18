@@ -14,7 +14,7 @@ public class State extends Filtra {
 		statiArray= getString(stati);
 		for(String s: statiArray)
 			for(Evento e:eve)
-				if(e.getStato()==s)
+				if(e.getStato().equals(s))
 					eventiFiltrati.add(e);		
 		return eventiFiltrati;
 	}

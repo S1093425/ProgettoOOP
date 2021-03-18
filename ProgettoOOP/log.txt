@@ -70,3 +70,39 @@ Errore avvenuto in data :Thu Mar 18 19:16:48 CET 2021
 Errore avvenuto in data :Thu Mar 18 19:17:20 CET 2021
      Causa: LO STATO IT NON E' STATO TROVATO
      Dettagli: Inserire uno stato dell'USA presente in lista o controllare la formattazione
+
+Errore avvenuto in data :Thu Mar 18 19:18:45 CET 2021
+     Causa: LO STATO IT NON E' STATO TROVATO
+     Dettagli: Inserire uno stato dell'USA presente in lista o controllare la formattazione
+
+Errore avvenuto in data :Thu Mar 18 19:19:13 CET 2021
+     Causa: LO STATO IT NON E' STATO TROVATO
+     Dettagli: Inserire uno stato dell'USA presente in lista o controllare la formattazione
+
+Errore avvenuto in data :Thu Mar 18 20:24:40 CET 2021
+     Causa: NON SONO DISPONIBILI EVENTI CON I FILTRI SPECIFICATI
+     Dettagli: Errore, consultare il file Log.txt
+
+Errore avvenuto in data :Thu Mar 18 20:26:08 CET 2021
+     Causa: LA SCELTA EFFETTUATA NON E'CONSENTITA
+     Dettagli: asdasdas NON E' UN'AZIONE CHE PUO' ESSERE ESEGUITA
+
+Errore avvenuto in data :Thu Mar 18 20:30:40 CET 2021
+     Causa: NON SONO DISPONIBILI EVENTI CON I FILTRI SPECIFICATI
+     Dettagli: Errore, consultare il file Log.txt
+
+Errore avvenuto in data :Thu Mar 18 20:34:08 CET 2021
+     Causa: LA SCELTA EFFETTUATA NON E'CONSENTITA
+     Dettagli: asdasdas NON E' UN'AZIONE CHE PUO' ESSERE ESEGUITA
+
+Errore avvenuto in data :Thu Mar 18 20:37:39 CET 2021
+     Causa: NON SONO DISPONIBILI EVENTI CON I FILTRI SPECIFICATI
+     Dettagli: Errore, consultare il file Log.txt
+
+Errore avvenuto in data :Thu Mar 18 20:39:42 CET 2021
+     Causa: NON SONO DISPONIBILI EVENTI CON I FILTRI SPECIFICATI
+     Dettagli: Errore, consultare il file Log.txt
+
+Errore avvenuto in data :Thu Mar 18 20:47:13 CET 2021
+     Causa: NON SONO DISPONIBILI EVENTI CON I FILTRI SPECIFICATI
+     Dettagli: Errore, consultare il file Log.txt

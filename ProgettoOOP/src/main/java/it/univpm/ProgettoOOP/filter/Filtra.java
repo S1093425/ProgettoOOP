@@ -10,15 +10,13 @@ public abstract class Filtra {
 	
 	public ArrayList<String> getString(String s){
 		ArrayList<String> stringhe = new ArrayList<String>();
-		int startIndex = 0; boolean flag=false;
+		int startIndex = 0;
 		for(int i=0;i<s.length();i++)
 			if(s.charAt(i)==',') {
-				stringhe.add(s.substring(startIndex, i-1));
+				stringhe.add(s.substring(startIndex, i));
 				startIndex= i+1;
-				flag=true;
 			}
-		if(flag==false)
-			stringhe.add(s);
+		stringhe.add(s.substring(startIndex, s.length()));
 		return stringhe;
 	}	
 }

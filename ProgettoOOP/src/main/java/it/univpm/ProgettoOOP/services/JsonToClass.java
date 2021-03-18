@@ -6,6 +6,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import it.univpm.ProgettoOOP.exception.EventException;
 import it.univpm.ProgettoOOP.log.Log;
 import it.univpm.ProgettoOOP.model.Evento;
 import it.univpm.ProgettoOOP.model.Global;
@@ -118,12 +119,13 @@ public class JsonToClass {
 			JsonSource.addProperty("Ticketmaster Resale", s.getSource()[3]);
 			return JsonStato;
 		}
-		public JsonObject getJsonFromGlobalStats(Global Stats) {
+		public JsonObject getJsonFromGlobalStats(Global Stats) throws EventException {
 			JsonObject JsonStatGlob = new JsonObject();
 				JsonArray JsonMaxStatiArr=new JsonArray();
 				JsonStatGlob.add("Stato con più eventi", JsonMaxStatiArr);
 					JsonObject JsonMaxStati=new JsonObject();
 					JsonMaxStatiArr.add(JsonMaxStati);
+					if(Stats.getTot()==null) throw new EventException();
 					JsonMaxStati.addProperty("Nome", Stats.getTot().getMaxS());
 					JsonMaxStati.addProperty("Eventi",Stats.getTot().getMax());
 				JsonArray JsonMinStatiArr=new JsonArray();
