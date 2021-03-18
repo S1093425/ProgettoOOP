@@ -62,6 +62,7 @@ public class MaxMin {
 	 */
 	public int getMax() {
 		return max;
+		
 	}
 	/**
 	 * Metodo setter per memorizzare il valore massimo
