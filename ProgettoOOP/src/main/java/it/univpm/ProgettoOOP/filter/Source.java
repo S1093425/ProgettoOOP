@@ -4,6 +4,12 @@ import java.util.ArrayList;
 
 import it.univpm.ProgettoOOP.model.Evento;
 
+/**
+ * @author Vecchiola Gregorio
+ * @author Rongoni Alessandro
+ *
+ * Filtro per source
+ */
 public class Source extends Filtra {
 	public Source() {	
 	}

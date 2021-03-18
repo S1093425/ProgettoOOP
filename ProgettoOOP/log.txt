@@ -106,3 +106,7 @@ Errore avvenuto in data :Thu Mar 18 20:39:42 CET 2021
 Errore avvenuto in data :Thu Mar 18 20:47:13 CET 2021
      Causa: NON SONO DISPONIBILI EVENTI CON I FILTRI SPECIFICATI
      Dettagli: Errore, consultare il file Log.txt
+
+Errore avvenuto in data :Thu Mar 18 22:04:58 CET 2021
+     Causa: NON SONO DISPONIBILI EVENTI CON I FILTRI SPECIFICATI
+     Dettagli: Errore, consultare il file Log.txt

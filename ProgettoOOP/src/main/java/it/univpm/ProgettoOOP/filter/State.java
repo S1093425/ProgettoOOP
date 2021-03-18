@@ -4,7 +4,18 @@ import java.util.ArrayList;
 
 import it.univpm.ProgettoOOP.model.Evento;
 
+/**
+ * 
+ * @author Rongoni Alessandro
+ * @author Vecchiola Gregorio
+ *
+ *
+ * Filtro per stato
+ */
 public class State extends Filtra {
+	/**
+	 * 
+	 */
 	public State() {	
 	}
 	@Override

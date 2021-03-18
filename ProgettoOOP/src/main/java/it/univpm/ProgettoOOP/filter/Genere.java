@@ -4,6 +4,13 @@ import java.util.ArrayList;
 
 import it.univpm.ProgettoOOP.model.Evento;
 
+/**
+ * 
+ * @author Vecchiola Gregorio
+ * @author Rongoni Alessandro
+ *
+ *	Filtro dei generi
+ */
 public class Genere extends Filtra {
 	public Genere() {	
 	}

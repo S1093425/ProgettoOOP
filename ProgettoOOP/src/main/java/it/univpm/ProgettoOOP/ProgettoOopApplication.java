@@ -6,7 +6,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import it.univpm.ProgettoOOP.services.DatabaseEventi;
-
+/**
+ * 
+ * @author Vecchiola Gregorio
+ * @author Rongoni ALessandro
+ * 
+ * La seguente classe si occupa di gestire ed avviare tutti i componenti dell'applicazione 
+ * e di aggiornare il database degli eventi ogni giorno
+ * 
+ */
 @SpringBootApplication
 public class ProgettoOopApplication {
 

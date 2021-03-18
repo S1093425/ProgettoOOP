@@ -11,9 +11,19 @@ import it.univpm.ProgettoOOP.log.Log;
 
 import it.univpm.ProgettoOOP.model.Evento;
 
+/**
+ * @author Rongoni Alessandro
+ * @author Vecchiola Gregorio
+ *
+ */
 public class Periodo extends Filtra {
+	
+	/**
+	 * Filtro per date, standard o personalizzate dall'utente
+	 */
 	public Periodo() {	
 	}
+	
 	@Override
 	public ArrayList<Evento> filtra(String periodo, ArrayList<Evento> eve ) {
 		ArrayList<Evento> eventiFiltrati = new ArrayList<Evento>();

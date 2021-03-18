@@ -12,19 +12,42 @@ import it.univpm.ProgettoOOP.model.Evento;
 import it.univpm.ProgettoOOP.model.Global;
 import it.univpm.ProgettoOOP.model.Stato;
 
+/**
+ * 
+ * @author Vecchiola Gregorio
+ * @author Rongoni Alessandro
+ * 
+ * Classe che gestisce lo spacchettamento del json e creazione di json 
+ */
 public class JsonToClass {
+	/**
+	 * Metodo per restituire il numero totale di pagine dal json ricevuto dall'API
+	 * @param evento_stato stringa contenente il json
+	 * @return numero di pagine totali
+	 */
 		public int getPage(String evento_stato) {
 			 JsonObject Obj = (JsonObject)JsonParser.parseString(evento_stato);
 			 JsonObject page = Obj.get("page").getAsJsonObject();
 			 int pagine=page.get("totalPages").getAsInt();
 			return pagine;
 		}
+		
+		/**
+		 * Metodo per restituire il numero totale di eventi dal json ricevuto dall'API
+		 * @param evento_stato stringa contenente il json
+		 * @return numero di eventi totali
+		 */
 		public int getTotalElements(String evento_stato) {
 			 JsonObject Obj = (JsonObject)JsonParser.parseString(evento_stato);
 			 JsonObject page = Obj.get("page").getAsJsonObject();
 			 int tot= page.get("totalElements").getAsInt();
 			return tot;
 		}
+		/**
+		 * Metodo per ottenere il nome dello stato dove si svolge il seguente evento
+		 * @param evento_stato stringa contenente il json
+		 * @return nome dello stato
+		 */
 		public String getNomeStato(String evento_stato) {
 			JsonObject Objsigle = (JsonObject)JsonParser.parseString(evento_stato);
 			 JsonObject embedded = Objsigle.get("_embedded").getAsJsonObject();
@@ -37,6 +60,12 @@ public class JsonToClass {
 			 String nome=statecode.get("name").getAsString();
 			return nome;
 		}
+		/**
+		 * metodo che, dato il json, restituisce un evento
+		 * @param evento_stato stringa contenente il json
+		 * @param i numero dell'evento contenuto nella pagina
+		 * @return Evento 
+		 */
 		public Evento getEventoFromJson(String evento_stato,int i){
 			Evento e= new Evento();
 			JsonObject Obj = (JsonObject)JsonParser.parseString(evento_stato);
@@ -97,6 +126,12 @@ public class JsonToClass {
 			return e;	
 		}
 		
+		/**
+		 * Metodo che date le statistiche di uno stato, restituisce il rispettivo json
+		 * @param s statistiche dello stato
+		 * @return json con tutte le statistiche dello stato
+		 * 
+		 */
 		public JsonObject getJsonFromStats(Stato s) {
 			JsonObject JsonStato= new JsonObject();
 			JsonStato.addProperty("Stato", s.getStato());
@@ -119,6 +154,13 @@ public class JsonToClass {
 			JsonSource.addProperty("Ticketmaster Resale", s.getSource()[3]);
 			return JsonStato;
 		}
+		/**
+		 * Metodo che date le statistiche globali, restituisce il rispettivo json
+		 * @param Stats statistiche globali
+		 * @return json con le statistiche globali degli stati
+		 * @throws EventException eccezione personalizzata per l'errore di filtraggio dell'evento
+		 * 
+		 */
 		public JsonObject getJsonFromGlobalStats(Global Stats) throws EventException {
 			JsonObject JsonStatGlob = new JsonObject();
 				JsonArray JsonMaxStatiArr=new JsonArray();

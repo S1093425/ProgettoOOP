@@ -7,11 +7,23 @@ import it.univpm.ProgettoOOP.model.Global;
 import it.univpm.ProgettoOOP.model.MaxMin;
 import it.univpm.ProgettoOOP.model.Stato;
 
+/**
+ * 
+ * @author Vecchiola Gregorio
+ * 
+ * Classe che gestisce le Statistiche di ciascuno stato
+ */
 public class Statistiche {
 	
 	public Statistiche() {	
 	}
 	
+	/**
+	 * Metodo per trovare le statistiche degli eventi di un singolo stato
+	 * @param eventi lista degli eventi
+	 * @param stato nome dello stato
+	 * @return statistiche di quello stato
+	 */
 	public Stato getStatsStato(ArrayList<Evento> eventi,String stato) {
 		Stato stat= new Stato();
 		int[] generi= {0,0,0,0};
@@ -42,6 +54,11 @@ public class Statistiche {
 		return stat;
 	}
 	
+	/**
+	 * Metodo per avere le statistiche globali degli eventi di tutti gli stati
+	 * @param stati lista degli stati appartenenti al file di testo "stati"
+	 * @return statistiche globali
+	 */
 	public Global getStatsGlobal(ArrayList<Stato> stati) {
 		Global statisticheGlobali= new Global();
 		for(int i=0;i<stati.size();i++) {
@@ -63,6 +80,12 @@ public class Statistiche {
 		return statisticheGlobali;
 	}
 	
+	/**
+	 * Metodo che trova il massimo e minimo degli eventi totali tra gli stati
+	 * @param Stats Massimo e minimo attuale
+	 * @param s stato da confrontare con il massimo e minimo
+	 * @return massimo e minimo
+	 */
 	public MaxMin getEventiTotStats(MaxMin Stats,Stato s) {
 		if(Stats.getMax()<s.getEventi_Totali()) {
 			Stats.setMax(s.getEventi_Totali());
@@ -75,6 +98,13 @@ public class Statistiche {
 		return Stats;
 	}
 	
+	/**
+	 * Metodo per ottenere il massimo e minimo degli eventi divisi per source
+	 * 
+	 * @param Stats Massimo e minimo attuale
+	 * @param s stato da confrontare con il massimo e minimo
+	 * @return massimo e minimo
+	 */
 	public MaxMin[] getSourceStats(MaxMin[] Stats, Stato s) {
 		for(int i=0;i<4;i++) {
 			if(Stats[i].getMax()<s.getSource()[i]) {
@@ -89,6 +119,13 @@ public class Statistiche {
 		return Stats;
 	}
 	
+	/**
+	 * Metodo per ottenere il massimo e minimo degli stati divisi per genere
+	 * 
+	 * @param Stats Massimo e minimo attuale
+	 * @param s stato da confrontare con il massimo e minimo
+	 * @return massimo e minimo
+	 */
 	public MaxMin[] getGeneriStats(MaxMin[] Stats, Stato s) {
 		for(int i=0;i<4;i++) {
 			if(Stats[i].getMax()<s.getGeneri()[i]) {

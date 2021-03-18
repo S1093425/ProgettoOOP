@@ -8,8 +8,19 @@ import java.net.URLConnection;
 import java.util.Scanner;
 import it.univpm.ProgettoOOP.log.Log;
 
+/**
+ * 
+ * @author Rongoni Alessandro
+ * Classe per fare le call all'API di TicketMaster, dove, dato un URL ritorna gli eventi 
+ * sotto forma di stringa 
+ */
 public class CercaEvento {
-
+		
+		/**
+		 * metodo che dato un URL personalizzato, richiede gli eventi di uno specifico satto  all'API di ticketMaster
+		 * @param url contenente la richiesta di uno specifico stato
+		 * @return stringa contenente tutti gli eventi di quello stato
+		 */ 
 		public static String getEvento(String url) {
 
 		String evento_stato = "";

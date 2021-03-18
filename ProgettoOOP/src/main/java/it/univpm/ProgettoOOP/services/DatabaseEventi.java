@@ -13,10 +13,17 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import it.univpm.ProgettoOOP.log.Log;
 import it.univpm.ProgettoOOP.model.Evento;
 
+/**
+ * @author Vecchiola Gregorio
+ * Classe che gestisce il database contenente gli eventi
+ */
 public class DatabaseEventi extends TimerTask {
-	
+	/**
+	 * Metodo che, all'avvio del programma, aggiorna il database con gli eventi degli stati salvati
+	 */
 	public void run() {	
 		ListaStati ls= new ListaStati();
 		JsonToClass jtc= new JsonToClass();
@@ -53,6 +60,11 @@ public class DatabaseEventi extends TimerTask {
 		System.out.println("Database Aggiornato.");
 	}
 	
+	/**
+	 * Metodo che restituisce la sigla di uno stato dato il suo nome
+	 * @param stato nome dello stato
+	 * @return sigla dello stato
+	 */
 	public String getSigla(String stato) {
 		String s= new String();
 		try {
@@ -67,6 +79,11 @@ public class DatabaseEventi extends TimerTask {
 		return s;
 	}
 	
+	/**
+	 * Metodo che scrive un evento nel file
+	 * @param s stringa contenete l'evento in json
+	 * @param b valore booleano che indica se l'evento è il primo della lista
+	 */
 	public void salvaEvento(String s,Boolean b) {
 		try {
 			BufferedWriter buffer;
@@ -78,10 +95,15 @@ public class DatabaseEventi extends TimerTask {
 			buffer.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			Log.report("Errore di scrittura","Errore nella scrittura del database");
 			e.printStackTrace();
 		}
 	}
 	
+	/**
+	 * Metodo per la lettura degli eventi dal file 
+	 * @return lista contenente tutti gli eventi del file
+	 */
 	public ArrayList<Evento> getEventi() {
 		ArrayList<Evento> eventi= new ArrayList<Evento>();
 		Gson gson= new Gson();
