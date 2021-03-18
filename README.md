@@ -13,7 +13,7 @@ Gregorio Vecchiola <b>S1093425</b><br>
   <li>Dopo aver aggiunto gli stati all'interno degli stati preferiti, si raccomanda di riavviare il programma.</li>
    <li>Lo stato "California" non funziona in quanto ha un problema sulla formattazione del JSON.</li>
    <li>La API non è in grado di stampare più di 1194 eventi, perciò verranno visualizzati solo i primi 1194 eventi di ogni stato ( page*size<1000, size<=200).</li>
-   <li>Per la rotta cerca si usano le sigle degli stati della seguente ricerca, mentre per il filtraggio,si usa il nome.</li>
+   <li>Per la rotta "/Cerca", si usano le sigle degli stati della seguente ricerca, mentre per le statistiche,si usa il nome completo.</li>
    </ul>
    
    <h1><b>Elenco delle SIGLE e NOMI degli stati degli U.S.A:</h1></b><br>
