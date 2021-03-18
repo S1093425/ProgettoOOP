@@ -10,6 +10,7 @@ Gregorio Vecchiola <b>S1093425</b><br>
    <h1><b>Premesse:</b><br></h1>
    <ul>
    <li>I PC con poca memoria potrebbero avere problemi a stampare gli stati con molti eventi. Inoltre si consiglia di usare un range temporale breve per il giusto filtraggio degli eventi e per la giusta visualizzazione.</li>
+  <li>Dopo aver aggiunto gli stati all'interno degli stati preferiti, si raccomanda di riavviare il programma.</li>
    <li>Lo stato "California" non funziona in quanto ha un problema sulla formattazione del JSON.</li>
    <li>La API non è in grado di stampare più di 1194 eventi, perciò verranno visualizzati solo i primi 1194 eventi di ogni stato ( page*size<1000, size<=200).</li>
    <li>Per la rotta cerca si usano le sigle degli stati della seguente ricerca, mentre per il filtraggio,si usa il nome.</li>
